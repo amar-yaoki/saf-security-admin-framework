@@ -1,0 +1,307 @@
+:root {
+    --login-bg:        #121212;
+    --login-card:      #1a1a1a;
+    --login-accent:    #2ea3f2;
+    --login-accent-hover: #e06a2a;
+    --login-text:      #f5f5f5;
+    --login-label:     #cccccc;
+    --login-muted:     #888888;
+    --login-border:    #333333;
+    --login-focus:     #2ea3f2;
+    --login-radius:    8px;
+    --login-shadow:    0 12px 48px rgba(0,0,0,0.6);
+}
+
+body.login {
+    background: var(--login-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+body.login::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(244,125,57,0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+#login {
+    background: var(--login-card);
+    border-radius: var(--login-radius);
+    box-shadow: var(--login-shadow);
+    padding: 40px 42px 36px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Logo */
+#login h1 {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+#login h1 a {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    width: 100%;
+    height: 64px;
+    display: block;
+    pointer-events: none;
+}
+
+/* Messaggio benvenuto */
+.saf-login-welcome {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.saf-login-welcome h2 {
+    color: var(--login-text);
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+}
+
+.saf-login-welcome p {
+    color: var(--login-muted);
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Form */
+.login form {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0;
+}
+
+.login label {
+    color: var(--login-label);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.login input[type="text"],
+.login input[type="password"],
+.login input[type="email"] {
+    border: 1.5px solid var(--login-border) !important;
+    border-radius: 6px !important;
+    padding: 11px 14px !important;
+    font-size: 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    color: var(--login-text) !important;
+    background: #121212 !important;
+    transition: border-color 0.18s, box-shadow 0.18s !important;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+}
+
+.login input[type="text"]:focus,
+.login input[type="password"]:focus,
+.login input[type="email"]:focus {
+    border-color: var(--login-focus) !important;
+    box-shadow: 0 0 0 3px rgba(244,125,57,0.15) !important;
+    outline: none !important;
+}
+
+.login .input {
+    background: #121212 !important;
+}
+
+/* Bottone submit */
+.login .button-primary,
+#login .button-primary,
+input#wp-submit {
+    background: var(--login-accent) !important;
+    border-color: var(--login-accent) !important;
+    border-radius: 6px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    padding: 12px 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    margin-top: 14px !important;
+    transition: background 0.18s, transform 0.1s, box-shadow 0.18s !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    cursor: pointer !important;
+    text-transform: uppercase;
+}
+
+.login .button-primary:hover,
+input#wp-submit:hover {
+    background: var(--login-accent-hover) !important;
+    border-color: var(--login-accent-hover) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 16px rgba(244,125,57,0.3) !important;
+}
+
+.login .button-primary:active,
+input#wp-submit:active {
+    transform: translateY(0) !important;
+}
+
+/* Remember me */
+.login .forgetmenot {
+    margin-top: 14px;
+}
+
+.login .forgetmenot label {
+    font-weight: 400;
+    color: var(--login-muted);
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.login .forgetmenot input[type="checkbox"] {
+    accent-color: var(--login-accent);
+}
+
+/* Link navigazione */
+#nav,
+#backtoblog {
+    text-align: center;
+    padding: 12px 0 0;
+    margin: 0;
+}
+
+#nav a,
+#backtoblog a {
+    color: var(--login-muted) !important;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+#nav a:hover,
+#backtoblog a:hover {
+    color: var(--login-accent) !important;
+    text-decoration: none;
+}
+
+#backtoblog {
+    display: none;
+}
+
+/* Language switcher — sotto "Password dimenticata" */
+.language-switcher {
+    text-align: center;
+    padding: 16px 0 0;
+    margin: 0;
+}
+
+.language-switcher label {
+    color: var(--login-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.language-switcher select {
+    background: #121212;
+    border: 1.5px solid var(--login-border);
+    border-radius: 6px;
+    color: var(--login-text);
+    font-size: 13px;
+    padding: 8px 12px;
+    max-width: 100%;
+    cursor: pointer;
+}
+
+.language-switcher select:focus {
+    border-color: var(--login-focus);
+    box-shadow: 0 0 0 3px rgba(244,125,57,0.15);
+    outline: none;
+}
+
+/* Messaggi errore / successo */
+#login_error,
+.login .message,
+.login .success {
+    border-radius: 6px !important;
+    border: none !important;
+    border-left: 3px solid var(--login-accent) !important;
+    font-size: 13px !important;
+    padding: 10px 14px !important;
+    margin-bottom: 18px !important;
+    box-shadow: none !important;
+    background: rgba(244,125,57,0.08) !important;
+    color: var(--login-text) !important;
+}
+
+#login_error {
+    border-left-color: #e53e3e !important;
+    background: rgba(229,62,62,0.08) !important;
+    color: #fc8181 !important;
+}
+
+.login .message,
+.login .success {
+    border-left-color: #38a169 !important;
+    background: rgba(56,161,105,0.08) !important;
+    color: #68d391 !important;
+}
+
+/* Reset password — descrizione */
+.login #pass1-text,
+.login .pw-weak {
+    display: none;
+}
+
+.login .indicator-hint {
+    color: var(--login-muted);
+    font-size: 12px;
+}
+
+/* Privacy policy */
+.login .privacy-policy-page-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--login-muted);
+}
+
+.login .privacy-policy-page-link a {
+    color: var(--login-muted);
+}
+
+.login .privacy-policy-page-link a:hover {
+    color: var(--login-accent);
+}
+
+/* Ridimensiona la card su schermi piccoli */
+@media (max-width: 480px) {
+    #login {
+        padding: 30px 24px 28px;
+        margin-top: 0;
+    }
+
+    #login h1 a {
+        height: 52px;
+    }
+}

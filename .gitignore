@@ -1,0 +1,18 @@
+node_modules/
+temp/
+*.zip
+*.afphoto
+*.afdesign
+*.afpub
+
+# Assets SVG sorgente (i PNG sono i file distribuiti)
+saf/assets/*-WP-*.svg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
