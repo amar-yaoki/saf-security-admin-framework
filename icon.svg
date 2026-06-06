@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" aria-label="SAF Security Shield">
+  <defs>
+    <linearGradient id="saf-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#121212"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="24" fill="url(#saf-bg)"/>
+  <path d="M64 16C64 16 40 28 28 28V60C28 88 50 108 64 112C78 108 100 88 100 60V28C88 28 64 16 64 16Z" fill="none" stroke="#f47d39" stroke-width="6"/>
+  <path d="M52 64L60 74L78 52" fill="none" stroke="#f47d39" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,179 @@
+# robots.txt — Divi Child Base
+# by Amar Amoretti — 2026
+# version v2.0.0 — Divi 5 compatible + AI bots + sicurezza estesa
+#
+# ⚠️ PRIMA DEL GO-LIVE:
+#   1. Sostituisci https://www.tuosito.it con l'URL reale
+#   2. Aggiorna URL della Sitemap (riga Sitemap:)
+#   3. Carica questo file in /public_html/robots.txt (root sito)
+#      Con Rank Math o Yoast: usa il loro editor integrato.
+
+# ============================================================
+# BOT GENERICI — Regole base WordPress + sicurezza
+# ============================================================
+
+User-agent: *
+
+# Blocca cartelle sensibili WordPress
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/upgrade/
+Disallow: /wp-content/backup*/
+Disallow: /cgi-bin/
+
+# Blocca file di sistema e accesso diretto
+Disallow: /xmlrpc.php
+Disallow: /wp-login.php
+Disallow: /wp-register.php
+Disallow: /wp-cron.php
+Disallow: /wp-config.php
+Disallow: /wp-json/
+Disallow: /.env
+Disallow: /readme.html
+Disallow: /license.txt
+Disallow: /readme.txt
+
+
+# Blocca tracking e parametri non SEO
+Disallow: /trackback/
+Disallow: /?author=*
+Disallow: /?author=
+Disallow: /*?replytocom=
+Disallow: /*?preview=
+Disallow: /*?attachment_id=
+
+# Blocca risultati di ricerca interni
+Disallow: /search/
+Disallow: /?s=
+
+# Consenti esplicitamente file statici necessari per rendering (dalla v1.3.0 di Amar)
+Allow: /wp-content/uploads/
+Allow: /wp-content/plugins/*.js
+Allow: /wp-content/plugins/*.css
+Allow: /wp-content/themes/*.js
+Allow: /wp-content/themes/*.css
+
+
+# ============================================================
+# GOOGLEBOT — Configurazione specifica
+# ============================================================
+
+User-agent: Googlebot
+Allow: /
+Allow: /wp-content/uploads/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /?s=
+Disallow: /?author=*
+
+
+# ============================================================
+# GOOGLEBOT-IMAGE — Consenti immagini
+# ============================================================
+
+User-agent: Googlebot-Image
+Allow: /wp-content/uploads/
+
+
+# ============================================================
+# BINGBOT — Configurazione specifica
+# ============================================================
+
+User-agent: Bingbot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /?s=
+
+
+# ============================================================
+# BOT AI — Blocco scraping per training modelli LLM
+# Rimuovere le voci dei bot di cui si vuole consentire l'indicizzazione.
+# ============================================================
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+
+# ============================================================
+# BOT SCRAPER / SEO TOOL — Opzionale
+# Decommentare se si vuole bloccare i principali SEO crawler
+# (attenzione: bloccare Ahrefs/Semrush riduce visibilità competitiva)
+# ============================================================
+
+# User-agent: AhrefsBot
+# Disallow: /
+
+# User-agent: SemrushBot
+# Disallow: /
+
+# User-agent: MJ12bot
+# Disallow: /
+
+# User-agent: DotBot
+# Disallow: /
+
+
+# ============================================================
+# SITEMAP
+# ⚠️ Aggiorna con l'URL reale generato da Rank Math
+# ============================================================
+
+Sitemap: https://www.tuosito.it/sitemap_index.xml
+
+# ============================================================
+# HOST CANONICO — opzionale (utile per Bing Webmaster Tools)
+# ============================================================
+
+# Host: https://www.tuosito.it

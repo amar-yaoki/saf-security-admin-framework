@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" aria-label="SAF Dati Sito — Tab Organizzazione">
+  <rect width="800" height="600" fill="#f0f0f1"/>
+  <rect width="800" height="50" fill="#1d2327"/>
+  <rect x="0" y="50" width="800" height="4" fill="#f47d39"/>
+  <text x="20" y="32" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#f0f0f1">⚙️ Dati Sito</text>
+  <rect x="20" y="70" width="760" height="42" fill="#121212" rx="4"/>
+  <text x="30" y="96" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#f47d39" font-variant="all-petite-caps">Organizzazione</text>
+  <text x="180" y="96" font-family="system-ui, sans-serif" font-size="14" fill="#666" font-variant="all-petite-caps">SEO &amp; Immagini</text>
+  <text x="330" y="96" font-family="system-ui, sans-serif" font-size="14" fill="#666" font-variant="all-petite-caps">Sicurezza</text>
+  <text x="450" y="96" font-family="system-ui, sans-serif" font-size="14" fill="#666" font-variant="all-petite-caps">Robots.txt</text>
+  <text x="565" y="96" font-family="system-ui, sans-serif" font-size="14" fill="#666" font-variant="all-petite-caps">NAP Footer</text>
+  <text x="680" y="96" font-family="system-ui, sans-serif" font-size="14" fill="#666" font-variant="all-petite-caps">Avanzate</text>
+  <rect x="20" y="112" width="760" height="2" fill="#f47d39"/>
+  <rect x="20" y="124" width="760" height="460" fill="#fff" rx="0 0 6 6"/>
+  <rect x="40" y="144" width="220" height="24" fill="#e8e8eb" rx="3"/>
+  <text x="48" y="160" font-family="system-ui, sans-serif" font-size="12" fill="#555">Nome organizzazione *</text>
+  <rect x="40" y="180" width="400" height="36" fill="#f6f7f7" rx="4" stroke="#ddd" stroke-width="1"/>
+  <text x="48" y="202" font-family="system-ui, sans-serif" font-size="13" fill="#999">es. Amar Amoretti</text>
+  <rect x="40" y="232" width="220" height="24" fill="#e8e8eb" rx="3"/>
+  <text x="48" y="248" font-family="system-ui, sans-serif" font-size="12" fill="#555">Email</text>
+  <rect x="40" y="268" width="400" height="36" fill="#f6f7f7" rx="4" stroke="#ddd" stroke-width="1"/>
+  <text x="48" y="290" font-family="system-ui, sans-serif" font-size="13" fill="#999">es. info@tuosito.it</text>
+  <rect x="40" y="320" width="220" height="24" fill="#e8e8eb" rx="3"/>
+  <text x="48" y="336" font-family="system-ui, sans-serif" font-size="12" fill="#555">Telefono</text>
+  <rect x="40" y="356" width="400" height="36" fill="#f6f7f7" rx="4" stroke="#ddd" stroke-width="1"/>
+  <text x="48" y="378" font-family="system-ui, sans-serif" font-size="13" fill="#999">es. +39 0123 456789</text>
+  <rect x="40" y="414" width="220" height="24" fill="#e8e8eb" rx="3"/>
+  <text x="48" y="430" font-family="system-ui, sans-serif" font-size="12" fill="#555">Indirizzo</text>
+  <rect x="40" y="450" width="400" height="36" fill="#f6f7f7" rx="4" stroke="#ddd" stroke-width="1"/>
+  <text x="48" y="472" font-family="system-ui, sans-serif" font-size="13" fill="#999">es. Via Roma 1, Milano</text>
+  <rect x="500" y="144" width="130" height="130" fill="#f6f7f7" rx="4" stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="565" y="215" font-family="system-ui, sans-serif" font-size="12" fill="#999" text-anchor="middle">Logo</text>
+  <rect x="40" y="510" width="160" height="40" fill="#f47d39" rx="4"/>
+  <text x="120" y="536" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">Salva impostazioni</text>
+</svg>

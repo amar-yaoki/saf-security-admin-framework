@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amar SAF — Guida Completa</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;color:#333;max-width:860px;margin:0 auto;padding:24px 20px 60px;background:#fafafa}
+  h1{font-size:28px;color:#2ea3f2;border-bottom:3px solid #2ea3f2;padding-bottom:12px;margin-bottom:8px}
+  h2{font-size:22px;color:#222;margin:36px 0 12px;border-bottom:1px solid #ddd;padding-bottom:6px}
+  h3{font-size:18px;color:#444;margin:24px 0 8px}
+  p,li{font-size:15px;margin:6px 0}
+  code{background:#f4f4f4;padding:2px 6px;border-radius:3px;font-size:13px;color:#c7254e}
+  pre{background:#f8f8f8;border:1px solid #e0e0e0;padding:14px 16px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5}
+  table{width:100%;border-collapse:collapse;margin:12px 0}
+  th,td{border:1px solid #ddd;padding:8px 12px;text-align:left;font-size:14px}
+  th{background:#2ea3f2;color:#fff;font-weight:600}
+  tr:nth-child(even){background:#f9f9f9}
+  .alert{background:#fff8e1;border-left:4px solid #f5a623;padding:12px 16px;margin:16px 0;border-radius:4px;font-size:14px}
+  .info{background:#e8f4fd;border-left:4px solid #2ea3f2;padding:12px 16px;margin:16px 0;border-radius:4px;font-size:14px}
+  .success{background:#e8fae8;border-left:4px solid #27ae60;padding:12px 16px;margin:16px 0;border-radius:4px;font-size:14px}
+  ul,ol{padding-left:24px}
+  .toc{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:16px 24px;margin:16px 0}
+  .toc a{color:#2ea3f2;text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ul{list-style:none;padding-left:0}
+  .toc li{margin:4px 0}
+  .toc .l2{padding-left:20px;font-size:14px}
+  .footer{margin-top:48px;padding-top:16px;border-top:2px solid #ddd;font-size:13px;color:#888;text-align:center}
+</style>
+</head>
+<body>
+
+<h1>Amar SAF — Guida Completa</h1>
+<p style="color:#888;font-size:14px">Security &amp; Admin Framework — v1.0.0</p>
+
+<div class="toc">
+  <strong>Indice</strong>
+  <ul>
+    <li><a href="#intro">1. Introduzione</a></li>
+    <li><a href="#installazione">2. Installazione</a></li>
+    <li class="l2"><a href="#install-mu">2.1 Come MU Plugin</a></li>
+    <li class="l2"><a href="#install-plugin">2.2 Come Plugin Normale</a></li>
+    <li><a href="#dati-sito">3. ⚙️ Dati Sito — I Tab</a></li>
+    <li class="l2"><a href="#tab-org">3.1 Organizzazione</a></li>
+    <li class="l2"><a href="#tab-seo">3.2 SEO &amp; Immagini</a></li>
+    <li class="l2"><a href="#tab-security">3.3 Sicurezza</a></li>
+    <li class="l2"><a href="#tab-robots">3.4 Robots.txt</a></li>
+    <li class="l2"><a href="#tab-nap">3.5 NAP Footer</a></li>
+    <li class="l2"><a href="#tab-advanced">3.6 Avanzate</a></li>
+    <li class="l2"><a href="#tab-child">3.7 Child Theme</a></li>
+    <li class="l2"><a href="#tab-credits">3.8 Crediti</a></li>
+    <li class="l2"><a href="#tab-plugins">3.9 Plugin e Strumenti</a></li>
+    <li class="l2"><a href="#tab-sistema">3.10 Sistema</a></li>
+    <li><a href="#moduli">4. Moduli SAF</a></li>
+    <li class="l2"><a href="#mod-security">4.1 Sicurezza (security.php)</a></li>
+    <li class="l2"><a href="#mod-admin">4.2 Admin (admin.php)</a></li>
+    <li class="l2"><a href="#mod-seo">4.3 SEO (seo.php)</a></li>
+    <li class="l2"><a href="#mod-helpers">4.4 Helpers (helpers.php)</a></li>
+    <li class="l2"><a href="#mod-performance">4.5 Performance (performance.php)</a></li>
+    <li class="l2"><a href="#mod-cleanup">4.6 Cleanup (cleanup.php)</a></li>
+    <li class="l2"><a href="#mod-dashboard">4.7 Dashboard (dashboard.php)</a></li>
+    <li class="l2"><a href="#mod-guida">4.8 Guida (guida.php)</a></li>
+    <li class="l2"><a href="#mod-svg">4.9 Upload SVG</a></li>
+    <li><a href="#child-theme">5. Child Theme</a></li>
+    <li class="l2"><a href="#child-create">5.1 Creazione</a></li>
+    <li class="l2"><a href="#child-header">5.2 Header Search Divi</a></li>
+    <li><a href="#shortcodes">6. Shortcode</a></li>
+    <li><a href="#credits">7. Crediti e Personalizzazione</a></li>
+    <li><a href="#uninstall">8. Disinstallazione</a></li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="intro">1. Introduzione</h2>
+<p><strong>Amar SAF</strong> (Security &amp; Admin Framework) è un plugin WordPress modulare che trasforma un qualsiasi tema in un sito professionale con strumenti di sicurezza, SEO, performance, amministrazione e documentazione.</p>
+<p>Creato da <strong>Amar Amoretti</strong> per sviluppatori e agenzie che vogliono un backend brandizzato e funzionale, senza dipendenze pesanti.</p>
+
+<div class="success">
+  <strong>Filosofia:</strong> Ogni modulo fa una cosa e la fa bene. Zero jQuery, zero bloat, zero dipendenze esterne.
+</div>
+
+<h3>Cosa include</h3>
+<ul>
+  <li><strong>9 moduli funzionali</strong> indipendenti</li>
+  <li><strong>10 tab</strong> in ⚙️ Dati Sito per configurare tutto</li>
+  <li><strong>7 tab</strong> in 📖 Guida Sito per documentazione</li>
+  <li><strong>Child theme</strong> agnostico (funziona con qualsiasi tema)</li>
+  <li><strong>Internazionalizzazione</strong> (Italiano / Inglese)</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="installazione">2. Installazione</h2>
+
+<h3 id="install-mu">2.1 Come MU Plugin (consigliato)</h3>
+<ol>
+  <li>Carica la cartella <code>saf/</code> in <code>/wp-content/mu-plugins/saf/</code></li>
+  <li>Carica <code>saf-loader.php</code> in <code>/wp-content/mu-plugins/saf-loader.php</code></li>
+  <li>I moduli sono subito attivi — non serve attivarli</li>
+</ol>
+
+<div class="info">Vantaggio: il plugin non può essere disattivato accidentalmente.</div>
+
+<h3 id="install-plugin">2.2 Come Plugin Normale</h3>
+<ol>
+  <li>Comprimi il contenuto della cartella <code>saf/</code> in un file .zip</li>
+  <li>Vai su <strong>Plugin → Aggiungi → Carica Plugin</strong></li>
+  <li>Carica lo zip e attiva</li>
+</ol>
+
+<div class="info">Il plugin si chiama <strong>Amar SAF</strong> nell'elenco plugin.</div>
+
+<!-- ============================================================ -->
+<h2 id="dati-sito">3. ⚙️ Dati Sito — I Tab</h2>
+<p>La pagina principale di configurazione. Ogni tab gestisce un'area specifica.</p>
+
+<h3 id="tab-org">3.1 🏢 Organizzazione</h3>
+<p>Dati principali del sito/azienda:</p>
+<ul>
+  <li><strong>Nome organizzazione</strong> — usato in JSON-LD, email, shortcode</li>
+  <li><strong>URL sito web</strong> — default: homepage</li>
+  <li><strong>Logo</strong> — seleziona con media uploader</li>
+  <li><strong>Indirizzo, CAP, Città, Partita IVA</strong> — per NAP e fatturazione</li>
+  <li><strong>Email, Telefono</strong> — contatti principali</li>
+  <li><strong>Social</strong> — Facebook, Instagram, YouTube, LinkedIn, Twitter</li>
+</ul>
+<p>Questi dati alimentano lo shortcode <code>[saf_footer_info]</code> e il JSON-LD Organization in homepage.</p>
+
+<h3 id="tab-seo">3.2 🔍 SEO &amp; Immagini</h3>
+<p>Immagini di fallback per Open Graph:</p>
+<ul>
+  <li><strong>Immagine OG Default</strong> — usata quando una pagina non ha featured image</li>
+  <li><strong>Immagine OG Secondaria</strong> — alternativa</li>
+</ul>
+<p>Le immagini devono essere almeno 1200×630px per funzionare bene su social.</p>
+
+<h3 id="tab-security">3.3 🔒 Sicurezza</h3>
+<ul>
+  <li><strong>Tentativi login massimi</strong> (3-20) — dopo il limite, IP bloccato 15 minuti</li>
+  <li><strong>Nascondi slug autore</strong> — /author/nome va in 404 (anti-enumerazione)</li>
+  <li><strong>Abilita sitemap XML</strong> — genera /sitemap.xml semplice</li>
+</ul>
+
+<h3 id="tab-robots">3.4 🤖 Robots.txt</h3>
+<p>Editor per il contenuto di robots.txt. La sitemap è auto-compilata. Utile per personalizzare le regole di crawling.</p>
+
+<h3 id="tab-nap">3.5 📍 NAP Footer</h3>
+<p>HTML personalizzato per il footer NAP (Nome, Indirizzo, Telefono). Richiamabile con <code>[saf_nap_html]</code>.</p>
+
+<h3 id="tab-advanced">3.6 ⚙️ Avanzate</h3>
+<ul>
+  <li><strong>Email — Mittente:</strong> nome e indirizzo per tutte le email WordPress</li>
+  <li><strong>Commenti:</strong> disabilita commenti su tutto il sito</li>
+  <li><strong>HSTS:</strong> Strict-Transport-Security (solo con SSL stabile)</li>
+  <li><strong>Upload SVG:</strong> abilita upload di file SVG con sanitizzazione automatica (rimozione script e event handler)</li>
+  <li><strong>Nascondi tab Progetto:</strong> utile dopo la consegna al cliente</li>
+  <li><strong>Menu Admin:</strong> nascondi voci a editor/autori (Strumenti, Commenti, Plugin, ecc.)</li>
+  <li><strong>Disinstallazione:</strong> pulisci tutte le opzioni SAF dal database</li>
+</ul>
+
+<h3 id="tab-child">3.7 🎨 Child Theme</h3>
+<ul>
+  <li><strong>Auto-create:</strong> crea il child theme <strong>amar-design</strong> con un clic dalla dashboard o dal tab, parametri configurabili</li>
+  <li><strong>Rilevamento intelligente:</strong> se un child theme diverso da amar-design è attivo, mostra i dettagli senza permettere reset</li>
+  <li><strong>Editor style.css:</strong> modifica contenuto da backend con salvataggio immediato</li>
+  <li><strong>Visualizzatore functions.php:</strong> textarea read-only per ispezione rapida</li>
+  <li><strong>Diagnostica:</strong> percorsi, permessi, proprietario file, metodo scrittura (WP_Filesystem o diretto)</li>
+  <li><strong>Notifiche:</strong> avviso OPcache se modifiche non subito visibili, avviso attivazione child theme, notice auto-create</li>
+  <li><strong>Header Search Divi:</strong> attivazione overlay AJAX fullscreen (se tema parent Divi)</li>
+</ul>
+
+<h3 id="tab-credits">3.8 📝 Crediti</h3>
+<ul>
+  <li>Nome autore e sito web</li>
+  <li>Nome cliente e sito web</li>
+  <li>Note di sviluppo (visibili solo nel backend)</li>
+  <li>Data creazione</li>
+</ul>
+
+<h3 id="tab-plugins">3.9 🛠 Plugin e Strumenti</h3>
+<p>Tab dedicato al rilevamento e checklist dei plugin e strumenti del sito:</p>
+<ul>
+  <li><strong>.htaccess</strong> — visualizzazione read-only del file .htaccess (se presente)</li>
+  <li><strong>Cache Lato Server</strong> — rilevamento OPcache, Memcache, Redis, APCu, Object Cache persistente, Reverse Proxy/Varnish, costante WP_CACHE</li>
+  <li><strong>Cache Lato Client/Tema</strong> — rilevamento Divi et-cache (conteggio file se Divi attivo), 12 plugin cache (W3 Total Cache, WP Super Cache, WP Rocket, Flying Press, ecc.), checkbox di conferma</li>
+  <li><strong>SEO Plugin</strong> — rilevamento di 11 plugin SEO (Yoast, Rank Math, SEOPress, AIOSEO, ecc.)</li>
+  <li><strong>Sitemap</strong> — rilevamento plugin sitemap (Google XML Sitemaps, sitemap built-in Yoast/Rank Math)</li>
+  <li><strong>Google Analytics & Search Console</strong> — rilevamento plugin analytics (Site Kit, MonsterInsights, ExactMetrics, ecc.)</li>
+  <li><strong>Backup</strong> — rilevamento plugin backup (UpdraftPlus, BackWPup, Duplicator, Jetpack, ecc.) + checklist hosting/off-site</li>
+  <li><strong>Sicurezza</strong> — rilevamento 10 plugin sicurezza (Wordfence, Solid Security, Sucuri, All In One WP Security, WPScan, Cerber, Defender, Anti-Malware, SecuPress, Jetpack Protect) + checklist 5 voci (firewall, protezione login, scan malware, SSL, aggiornamenti automatici)</li>
+  <li>Checkbox di conferma per ogni sezione: spunta ciò che è configurato e funzionante</li>
+</ul>
+
+<h3 id="tab-sistema">3.10 ⚙️ Sistema</h3>
+<p>Tab informativo con diagnostica server, opzioni SAF e self-test:</p>
+<ul>
+  <li><strong>Info Server</strong> — PHP version, WordPress version, tema attivo, permalink structure, memory limit, max execution time, upload max</li>
+  <li><strong>Costanti SAF</strong> — elenco di tutte le costanti definite da SAF con relativo valore</li>
+  <li><strong>File SAF</strong> — verifica esistenza di tutti i file del plugin (admin.php, security.php, seo.php, ecc.)</li>
+  <li><strong>Language Files</strong> — verifica caricamento lingue it_IT e en_US e conteggio chiavi tradotte</li>
+  <li><strong>Options SAF</strong> — elenco opzioni salvate nel database con valori</li>
+  <li><strong>Self-Test completo</strong> — pulsante per eseguire diagnostica automatica che verifica: costanti SAF obbligatorie (12), file plugin (10), language files (2), chiavi traduzione (12 obbligatorie), opzioni DB (3+), funzione saf_write_file(), costanti WordPress (WP_DEBUG, WP_DEBUG_DISPLAY, DISALLOW_FILE_EDIT, WP_CACHE, WP_MEMORY_LIMIT)</li>
+  <li>Risultati con semaforo: <span class="ok">✅ OK</span>, <span class="warn">⚠️ WARN</span>, <span class="err">❌ ERR</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="moduli">4. Moduli SAF</h2>
+
+<h3 id="mod-security">4.1 🔒 Sicurezza (security.php)</h3>
+<ul>
+  <li><strong>Rate limiting</strong> login — blocca IP dopo N tentativi falliti</li>
+  <li><strong>XML-RPC disabilitato</strong> — prevenzione attacchi brute force</li>
+  <li><strong>HSTS</strong> — header Strict-Transport-Security (opzionale, da attivare)</li>
+  <li><strong>Honeypot</strong> — campo nascosto anti-bot nel login</li>
+  <li><strong>Login brandizzato</strong> — logo e stile personalizzati</li>
+  <li><strong>Security headers</strong> — X-Content-Type-Options, X-Frame-Options</li>
+  <li><strong>Disabilita author enum</strong> — /author/slug → 404</li>
+</ul>
+
+<h3 id="mod-admin">4.2 ⚙️ Admin (admin.php)</h3>
+<p>Il modulo più grande. Gestisce:</p>
+<ul>
+  <li>Pagina ⚙️ Dati Sito con 10 tab (Org, SEO, Security, Robots, NAP, Child, Credits, Adv, Plugin, Sistema)</li>
+  <li>Registrazione settings e sanitizzatori</li>
+  <li>Helper <code>saf_get_org_data()</code> — array dati organizzazione</li>
+  <li>Media uploader per logo</li>
+  <li>Menu admin brandizzato arancione</li>
+  <li>SMTP from name/email</li>
+  <li>Pulizia widget dashboard</li>
+  <li>Disinstallazione opzioni DB</li>
+</ul>
+
+<h3 id="mod-seo">4.3 🔍 SEO (seo.php)</h3>
+<ul>
+  <li><strong>JSON-LD Organization</strong> — homepage</li>
+  <li><strong>JSON-LD WebSite</strong> — homepage</li>
+  <li><strong>BreadcrumbList</strong> — breadcrumb JSON-LD</li>
+  <li><strong>Canonical URL</strong> — per tutte le pagine</li>
+  <li><strong>Open Graph tags</strong> — og:title, og:description, og:image, og:url</li>
+  <li><strong>Meta description</strong> fallback</li>
+</ul>
+<p>Non sostituisce Rank Math / Yoast: questi tag si attivano solo se Rank Math è assente.</p>
+
+<h3 id="mod-helpers">4.4 🛠️ Helpers (helpers.php)</h3>
+<ul>
+  <li><strong>saf_youtube_id()</strong> — estrae ID YouTube da URL</li>
+  <li><strong>saf_date_ita()</strong> — data in formato italiano</li>
+  <li><strong>saf_social_share_link()</strong> — link condivisione social</li>
+  <li><strong>saf_pagination()</strong> — paginazione WP</li>
+  <li><strong>saf_reading_time()</strong> — tempo di lettura shortcode</li>
+  <li><strong>saf_nap_html()</strong> — shortcode NAP footer</li>
+  <li><strong>saf_footer_info()</strong> — shortcode info footer</li>
+  <li><strong>saf_truncate()</strong> — tronca testo</li>
+</ul>
+
+<h3 id="mod-performance">4.5 🚀 Performance (performance.php)</h3>
+<ul>
+  <li><strong>oEmbed disabilitato</strong> — blocca embedding esterni non necessari</li>
+  <li><strong>Heartbeat control</strong> — riduce frequenza heartbeat (60s)</li>
+  <li><strong>Revisioni limitate</strong> — massimo 5 revisioni per post</li>
+  <li><strong>Lazy load</strong> — immagini e iframe nativi</li>
+  <li><strong>CF7 ottimizzato</strong> — carica JS/CSS solo dove serve</li>
+  <li><strong>jQuery migrate off</strong> — se non usi plugin che lo richiedono</li>
+  <li><strong>Cache preconnect</strong> — hint per Google Analytics, CDN</li>
+</ul>
+
+<h3 id="mod-cleanup">4.6 🧹 Cleanup (cleanup.php)</h3>
+<ul>
+  <li><strong>Commenti disabilitati</strong> — se attivato da Avanzate</li>
+  <li><strong>Menu admin nascosto</strong> — se configurato</li>
+  <li><strong>Admin bar</strong> — menu personalizzato</li>
+  <li><strong>Footer admin</strong> — brandizzato con crediti sviluppatore</li>
+  <li><strong>Update footer</strong> — rimosso (versione WP)</li>
+</ul>
+
+<h3 id="mod-dashboard">4.7 📊 Dashboard (dashboard.php)</h3>
+<ul>
+  <li>Widget <strong>Panoramica Sito</strong> in homepage admin</li>
+  <li>Avanzamento checklist pre-go-live con barra colorata</li>
+  <li>Info sito, tema, organizzazione</li>
+  <li>Pulsanti rapidi per Dati Sito e Guida</li>
+  <li>Crediti sviluppatore (da tab Crediti)</li>
+  <li>Sezione sicurezza (stato SSL, XML-RPC, HSTS, plugin)</li>
+</ul>
+
+<h3 id="mod-guida">4.8 📖 Guida (guida.php)</h3>
+<p>Pagina di documentazione integrata con 7 tab:</p>
+<ul>
+  <li><strong>Info</strong> — crediti, licenza, disclaimer, guide</li>
+  <li><strong>Struttura</strong> — mappa file del tema</li>
+  <li><strong>Shortcode</strong> — reference copia-incolla</li>
+  <li><strong>Sicurezza</strong> — dettaglio misure attive</li>
+  <li><strong>Checklist</strong> — pre-go-live con stato salvato</li>
+  <li><strong>Progetto</strong> — documenti PDF con date e note</li>
+  <li><strong>Note Dev</strong> — appunti sviluppatore</li>
+</ul>
+
+<h3 id="mod-svg">4.9 🖼 Upload SVG</h3>
+<p>Modulo integrato in saf-loader.php per la gestione sicura di file SVG:</p>
+<ul>
+  <li>Abilitazione da ⚙️ Dati Sito → Avanzate → Upload SVG</li>
+  <li>Sanitizzazione DOM-based: whitelist di tag e attributi SVG sicuri</li>
+  <li>Rimozione automatica di script, event handler (onclick, onload, onerror...) e javascript: href</li>
+  <li>Supporto MIME corretto per file .svg e .svgz</li>
+  <li>Filtri WordPress: upload_mimes, wp_check_filetype_and_ext, wp_handle_upload_prefilter</li>
+</ul>
+<div class="alert">⚠️ Per sicurezza massima in produzione, installa la libreria <code>enshrined/svg-sanitize</code> via Composer.</div>
+
+<!-- ============================================================ -->
+<h2 id="child-theme">5. Child Theme</h2>
+<p>Il child theme <strong>amar-design</strong> è un tema figlio preconfigurato che SAF mette a disposizione. <strong>Non viene creato automaticamente</strong> — SAF chiede all'utente se desidera crearlo tramite un avviso nella dashboard.</p>
+
+<div class="alert">
+  <strong>Perché serve un child theme?</strong> Se modifichi i file del tema principale (Divi, Astra, Twenty Twenty-Four…), le tue personalizzazioni vengono sovrascritte a ogni aggiornamento del tema. Un child theme mantiene le modifiche al sicuro.
+</div>
+
+<h3 id="child-create">5.1 Creazione</h3>
+<ol>
+  <li>Vai su <strong>⚙️ Dati Sito → Child Theme</strong></li>
+  <li>Se non esiste, clicca <strong>"Crea child theme amar-design"</strong></li>
+  <li>SAF copia style.css, screenshot.png, functions.php e le cartelle inc/, css/, js/</li>
+  <li>Modifica il campo <strong>Template</strong> con la cartella del tuo tema (es. <code>Divi</code>, <code>astra</code>, <code>twentytwentyfour</code>)</li>
+  <li>Attiva il tema da <strong>Aspetto → Temi</strong></li>
+</ol>
+<p>Se il child theme esiste già, puoi usare il pulsante <strong>"Resetta e ricrea"</strong> con doppia conferma per cancellare tutto e ricreare da zero.</p>
+
+<h3 id="child-css">5.2 style.css</h3>
+<p>Il file <code>style.css</code> del child theme ha una riga obbligatoria:</p>
+<pre>Template: NOME-CARTELLA-TEMA-PRINCIPALE</pre>
+<p>Sostituisci <code>YOUR-THEME</code> con il nome esatto della cartella del tuo tema (es. <code>Divi</code>, <code>astra</code>, <code>twentytwentyfour</code>).</p>
+<p>Puoi modificare <code>style.css</code> dal backend: ⚙️ Dati Sito → Child Theme.</p>
+
+<h3 id="child-header">5.3 Header Search Divi</h3>
+<p>Attivabile da ⚙️ Dati Sito → Child Theme → Funzionalità Divi.</p>
+<ul>
+  <li>Aggiunge icona lente nel menu mobile</li>
+  <li>Overlay fullscreen per la ricerca</li>
+  <li>Ricerca AJAX in tempo reale su titoli</li>
+  <li>Scorciatoia da tastiera: <kbd>Ctrl+K</kbd> o <kbd>⌘K</kbd></li>
+</ul>
+<p>Funziona solo se il tema parent è Divi.</p>
+
+<!-- ============================================================ -->
+<h2 id="shortcodes">6. Shortcode</h2>
+<table>
+  <tr><th>Shortcode</th><th>Descrizione</th><th>Attributi</th></tr>
+  <tr><td><code>[saf_footer_info]</code></td><td>Info footer da Dati Sito</td><td>—</td></tr>
+  <tr><td><code>[saf_nap_html]</code></td><td>HTML NAP personalizzato</td><td>—</td></tr>
+  <tr><td><code>[saf_reading_time]</code></td><td>Tempo di lettura articolo</td><td><code>wpm</code> (default: 200), <code>label</code>, <code>suffix</code></td></tr>
+  <tr><td><code>[saf_year]</code></td><td>Anno corrente</td><td>—</td></tr>
+  <tr><td><code>[saf_social_share]</code></td><td>Pulsanti condivisione</td><td><code>network</code> (facebook, twitter, linkedin)</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="credits">7. Crediti e Personalizzazione</h2>
+<p>Due livelli di crediti:</p>
+<ol>
+  <li><strong>CREDITS.md</strong> — file nel plugin con autore e sito. Modificalo per cambiare i crediti GPL.</li>
+  <li><strong>Tab Crediti</strong> — in ⚙️ Dati Sito, imposta il tuo nome, sito web, cliente e note di sviluppo.</li>
+</ol>
+<p>I crediti appaiono in:</p>
+<ul>
+  <li>Widget Dashboard</li>
+  <li>Footer admin di WordPress</li>
+  <li>Pagina ⚙️ Dati Sito</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="uninstall">8. Disinstallazione</h2>
+<ol>
+  <li>Disattiva il plugin o rimuovi saf-loader.php (se MU)</li>
+  <li>Vai in ⚙️ Dati Sito → Avanzate → <strong>Pulisci tutte le opzioni SAF</strong></li>
+  <li>Oppure esegui SQL: <code>DELETE FROM wp_options WHERE option_name LIKE 'saf_%';</code></li>
+</ol>
+
+<div class="alert">
+  <strong>Nota:</strong> Le opzioni salvate rimangono nel database anche a plugin disattivato. Usa la pulizia manuale per rimuoverle.
+</div>
+
+<!-- ============================================================ -->
+<div class="footer">
+  Amar SAF v1.0.0 — Sviluppato da <a href="https://yaoki.academy" target="_blank">Amar Amoretti</a><br>
+  GNU General Public License v2 or later
+</div>
+
+</body>
+</html>

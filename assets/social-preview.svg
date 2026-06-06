@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" aria-label="Amar SAF — Security &amp; Admin Framework">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#121212"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+
+  <!-- Shield centrato -->
+  <path d="M640 160C640 160 540 200 500 200V320C500 400 580 460 640 470C700 460 780 400 780 320V200C740 200 640 160 640 160Z" fill="none" stroke="#f47d39" stroke-width="12"/>
+  <path d="M590 310L625 350L695 270" fill="none" stroke="#f47d39" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- EN -->
+  <text x="640" y="520" font-family="system-ui, sans-serif" font-size="46" font-weight="700" fill="#f47d39" text-anchor="middle" font-variant="all-petite-caps">Amar SAF</text>
+  <text x="640" y="558" font-family="system-ui, sans-serif" font-size="24" fill="#ccc" text-anchor="middle">Security &amp; Admin Framework for WordPress</text>
+
+  <!-- IT -->
+  <text x="640" y="590" font-family="system-ui, sans-serif" font-size="18" fill="#777" text-anchor="middle">Framework operativo per configurare, proteggere e amministrare WordPress</text>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1544 500" aria-label="Amar SAF Banner Retina">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#121212"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1544" height="500" fill="url(#bg)"/>
+  <path d="M120 140C120 140 60 170 50 170V240C50 296 90 330 120 336C150 330 190 296 190 240V170C180 170 120 140 120 140Z" fill="none" stroke="#f47d39" stroke-width="10"/>
+  <path d="M96 230L112 256L146 210" fill="none" stroke="#f47d39" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="230" y="200" font-family="sans-serif" font-size="60" font-weight="700" fill="#f47d39" font-variant="all-petite-caps">Amar SAF</text>
+  <text x="230" y="260" font-family="sans-serif" font-size="28" fill="#ccc">Security &amp; Admin Framework</text>
+  <text x="230" y="304" font-family="sans-serif" font-size="24" fill="#666">PHP 8.2+ · Zero jQuery · Any Theme</text>
+  <text x="1480" y="230" font-family="sans-serif" font-size="22" fill="#555" text-anchor="end">
+    <tspan x="1480" dy="0">Sicurezza · Admin</tspan>
+    <tspan x="1480" dy="34">SEO · Performance</tspan>
+    <tspan x="1480" dy="34">Cleanup · Guida</tspan>
+  </text>
+</svg>
