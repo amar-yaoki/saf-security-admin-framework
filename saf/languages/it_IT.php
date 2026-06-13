@@ -222,4 +222,12 @@ return array(
     'sc_copy_note'          => '(copia link)',
     'sc_copy_label'         => 'Copia link',
     'sc_default_note'       => 'Se nessuna spunta è salvata, tutti i pulsanti sono visibili (comportamento predefinito).',
+
+
+    /* Shortcode — Developer section */
+    'sc_social_section' => 'Social',
+    'sc_dev_section'    => 'Developer',
+    'sc_dev_desc'       => 'Profili sviluppatore. Si attivano con <code>[condividi_social type="dev"]</code>.',
+    'sc_dev_profiles'   => 'Profili Dev',
+    'sc_dev_url_note'   => 'Inserisci URL completo del profilo (es. https://github.com/tuo-username).',
 );

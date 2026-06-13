@@ -222,4 +222,12 @@ return array(
     'sc_copy_note'          => '(copies link)',
     'sc_copy_label'         => 'Copy link',
     'sc_default_note'       => 'If no boxes are saved, all buttons are visible (default behaviour).',
+
+
+    /* Shortcode — Developer section */
+    'sc_social_section' => 'Social',
+    'sc_dev_section'    => 'Developer',
+    'sc_dev_desc'       => 'Developer profiles. Enable with <code>[condividi_social type="dev"]</code>.',
+    'sc_dev_profiles'   => 'Dev Profiles',
+    'sc_dev_url_note'   => 'Enter the full profile URL (e.g. https://github.com/your-username).',
 );
