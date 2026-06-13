@@ -10,8 +10,9 @@ return array(
     'tab_seo'      => '🔍 SEO & Images',
     'tab_security' => '🔒 Security',
     'tab_robots'   => '🤖 Robots.txt',
-    'tab_nap'      => '📍 NAP Footer',
-    'tab_advanced' => '⚙️ Advanced',
+    'tab_nap'       => '📍 NAP Footer',
+    'tab_shortcode' => '📋 Shortcodes',
+    'tab_advanced'  => '⚙️ Advanced',
     'tab_child'    => '🎨 Child Theme',
     'tab_credits'  => '📝 Credits',
     'tab_sistema'  => '🖥 System',
@@ -141,10 +142,6 @@ return array(
     'child_css_header' => 'style.css Header',
     'child_css_header_desc' => 'Each field has a specific function for WordPress. The <strong>Template</strong> field is required.',
     'child_css_shortcuts' => 'Use Customize &rarr; Additional CSS for quick rules. Here only structural overrides of the parent theme.',
-    'child_divi_title' => '🟠 Divi Features',
-    'child_divi_desc' => 'Enable header search with AJAX overlay (magnifier + fullscreen search). Works when the parent theme is <strong>Divi</strong>.<br>If enabled, the child theme loads <code>inc/header-search.php</code>.',
-    'child_divi_label' => 'Enable Divi header search',
-    'child_divi_note'  => 'Adds magnifier icon in Divi mobile menu + fullscreen AJAX search overlay.',
     'child_save_divi'  => 'Save Divi settings',
 
     /* Credits tab */
@@ -194,6 +191,10 @@ return array(
     'footer_dev_by'  => 'Developed by',
     'url_placeholder_domain' => 'domain.com',
 
+    /* Login */
+    'login_welcome_title' => 'Sign In',
+    'login_welcome_desc' => 'Enter your credentials to sign in.',
+
     /* Errors & feedback */
     'err_permission' => 'Permission denied.',
     'err_saved'                => '✔ Saved.',
@@ -203,6 +204,7 @@ return array(
     'err_css_updated' => '✔ style.css updated.',
     'err_css_write_fail' => '❌ Could not write %s. Check permissions.',
     'err_child_created' => '✔ Child theme <strong>amar-design</strong> created.',
+    'err_ajax_unauthorized' => 'Unauthorized request.',
     'child_activate_warn' => 'Remember to activate the child theme from <strong>Appearance → Themes</strong> after creating it and configuring the parameters (Template, Name, Author) in the section below.',
     'child_detected'     => 'SAF detected an active child theme and will manage it automatically. You can edit style.css and view functions.php below.',
     'child_functions_title' => 'functions.php',
@@ -211,4 +213,13 @@ return array(
     /* Plugin & Tools tab */
     'plugins_title' => 'Plugins & Tools',
     'plugins_desc'  => 'Detection and checklist of site plugins and tools.',
+
+    /* Shortcode tab */
+    'sc_social_share_title' => '📤 Social Sharing',
+    'sc_social_share_desc'  => 'Choose which buttons to display in the <code>[condividi_social]</code> shortcode. Instagram and TikTok copy the link to clipboard (no native share URL).',
+    'sc_shortcode_usage'    => 'Use the shortcode:',
+    'sc_active_buttons'     => 'Active buttons',
+    'sc_copy_note'          => '(copies link)',
+    'sc_copy_label'         => 'Copy link',
+    'sc_default_note'       => 'If no boxes are saved, all buttons are visible (default behaviour).',
 );

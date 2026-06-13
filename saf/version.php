@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SAF_VERSION', '1.0.0' );
+define( 'SAF_VERSION', '1.2.1' );
 define( 'SAF_DIR',     __DIR__ . '/' );
 define( 'SAF_URL',     plugin_dir_url( SAF_DIR . 'saf-loader.php' ) );
 

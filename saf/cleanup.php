@@ -46,6 +46,22 @@ function saf_filter_comments_status( $open, $post_id ) {
     return $open;
 }
 
+// Blocca commenti via REST API (spam bypass)
+add_filter( 'rest_allow_anonymous_comments', 'saf_block_rest_comments' );
+add_filter( 'rest_pre_insert_comment',       'saf_block_rest_comments_insert' );
+function saf_block_rest_comments( $allow ) {
+    $adv = (array) get_option( 'saf_adv_settings', array() );
+    if ( ! empty( $adv['disable_comments'] ) ) return false;
+    return $allow;
+}
+function saf_block_rest_comments_insert( $prepared_comment ) {
+    $adv = (array) get_option( 'saf_adv_settings', array() );
+    if ( ! empty( $adv['disable_comments'] ) ) {
+        wp_die( 'Comments are disabled.', 403 );
+    }
+    return $prepared_comment;
+}
+
 // Restituisce array vuoto per i commenti
 add_filter( 'comments_array', 'saf_filter_comments_array', 10, 2 );
 function saf_filter_comments_array( $comments, $post_id ) {

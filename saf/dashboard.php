@@ -83,7 +83,7 @@ function saf_render_dashboard_widget() {
             <?php endif; ?>
             <div class="saf-dash-info-item">
                 <span class="saf-dash-label">🎨 Tema</span>
-                <span>Amar Design v<?php echo esc_html( $version ); ?> — Divi <?php echo esc_html( wp_get_theme( get_template() )->get('Version') ?: 'n/a' ); ?></span>
+                <span>Amar Design v<?php echo esc_html( $version ); ?> — Divi <?php $pt = wp_get_theme( get_template() ); echo esc_html( $pt->exists() ? $pt->get('Version') : 'n/a' ); ?></span>
             </div>
         </div>
 

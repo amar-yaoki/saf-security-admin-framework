@@ -69,41 +69,51 @@ function saf_admin_styles() {
         color: #ffffff !important;
     }
 
-    /* Tab admin brandizzati: dark Amar — stile screenshot */
+    /* Tab admin brandizzati: Amar */
     .nav-tab-wrapper {
         display: grid !important;
         grid-template-columns: repeat(5, 1fr) !important;
-        gap: 2px !important;
+        gap: 4px !important;
         border-bottom: none !important;
-        margin-bottom: 0 !important;
-        padding: 6px 6px 0 6px !important;
-        background: #121212 !important;
-        border-radius: 6px 6px 0 0 !important;
+        margin: 0 0 6px 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border-radius: 0 !important;
     }
     .nav-tab {
         font-variant: all-petite-caps !important;
         letter-spacing: 0.03em !important;
-        font-size: 13px !important;
+        font-size: 14px !important;
         font-weight: 600 !important;
         padding: 10px 4px !important;
         text-align: center !important;
         transition: all 0.2s ease !important;
-        background: transparent !important;
-        border: 1px solid transparent !important;
-        color: #666 !important;
-        border-radius: 4px 4px 0 0 !important;
+        background: #2a2a2a !important;
+        border: 1px solid #3a3a3a !important;
+        border-radius: 4px !important;
+        color: #888 !important;
         margin: 0 !important;
+        outline: none !important;
+        box-shadow: none !important;
     }
     .nav-tab:hover {
-        background: rgba(255,255,255,0.06) !important;
-        color: #ccc !important;
+        background: #333 !important;
+        color: #ddd !important;
+        border-color: #555 !important;
+    }
+    .nav-tab:focus,
+    .nav-tab:active {
+        outline: none !important;
+        box-shadow: none !important;
+        border-color: #f47D39 !important;
     }
     .nav-tab-active,
     .nav-tab-active:hover {
-        background: #121212 !important;
-        border-color: transparent !important;
-        color: #f47D39 !important;
+        background: #f47D39 !important;
+        border-color: #f47D39 !important;
+        color: #121212 !important;
         box-shadow: none !important;
+        outline: none !important;
     }
     .wrap.saf-admin-wrap h1 {
         font-size: 22px !important;
@@ -169,6 +179,9 @@ function saf_register_settings() {
     register_setting( 'saf_sec_group', 'saf_sec_settings', array(
         'sanitize_callback' => 'saf_sanitize_sec',
     ) );
+    register_setting( 'saf_sc_group', 'saf_sc_settings', array(
+        'sanitize_callback' => 'saf_sanitize_sc',
+    ) );
 }
 
 function saf_sanitize_org( $input ) {
@@ -179,6 +192,7 @@ function saf_sanitize_org( $input ) {
         'address'   => sanitize_text_field(   $input['address']   ?? '' ),
         'cap'       => sanitize_text_field(   $input['cap']       ?? '' ),
         'city'      => sanitize_text_field(   $input['city']      ?? '' ),
+        'country'   => strtoupper( sanitize_text_field( $input['country'] ?? 'IT' ) ),
         'piva'      => sanitize_text_field(   $input['piva']      ?? '' ),
         'email'     => sanitize_email(        $input['email']     ?? '' ),
         'phone'     => sanitize_text_field(   $input['phone']     ?? '' ),
@@ -207,6 +221,36 @@ function saf_sanitize_sec( $input ) {
     return array(
         'max_attempts' => $attempts,
     );
+}
+
+
+function saf_sanitize_sc( $input ) {
+    $allowed_social = array( 'facebook', 'whatsapp', 'telegram', 'instagram', 'tiktok', 'email', 'copy' );
+    $allowed_dev    = array( 'github', 'gitlab', 'stackoverflow', 'reddit', 'devto', 'medium', 'linkedin', 'amazon_author', 'x', 'mastodon', 'youtube', 'codepen', 'personal_site' );
+    $clean = array();
+
+    if ( ! empty( $input['social_share'] ) && is_array( $input['social_share'] ) ) {
+        $clean['social_share'] = array_values( array_intersect( $input['social_share'], $allowed_social ) );
+    } else {
+        $clean['social_share'] = array();
+    }
+
+    if ( ! empty( $input['dev_enabled'] ) && is_array( $input['dev_enabled'] ) ) {
+        $clean['dev_enabled'] = array_values( array_intersect( $input['dev_enabled'], $allowed_dev ) );
+    } else {
+        $clean['dev_enabled'] = array();
+    }
+
+    $clean['dev_urls'] = array();
+    if ( ! empty( $input['dev_urls'] ) && is_array( $input['dev_urls'] ) ) {
+        foreach ( $input['dev_urls'] as $key => $url ) {
+            if ( in_array( $key, $allowed_dev, true ) && ! empty( trim( $url ) ) ) {
+                $clean['dev_urls'][ $key ] = esc_url_raw( trim( $url ) );
+            }
+        }
+    }
+
+    return $clean;
 }
 
 
@@ -265,6 +309,7 @@ function saf_admin_enqueue( $hook ) {
     );
     wp_localize_script( 'saf-admin', 'saf_admin', array(
         'nonce' => wp_create_nonce( 'saf_admin_nonce' ),
+        'dismiss_nonce' => wp_create_nonce( 'saf_dismiss_notice' ),
     ) );
 }
 
@@ -286,16 +331,17 @@ function saf_render_dati_sito() {
     $credits = (array) get_option( 'saf_credits_settings', array() );
 
     $tabs = array(
-        'org'      => saf_t( 'tab_org' ),
-        'seo'      => saf_t( 'tab_seo' ),
-        'security' => saf_t( 'tab_security' ),
-        'robots'   => saf_t( 'tab_robots' ),
-        'nap'      => saf_t( 'tab_nap' ),
-        'advanced' => saf_t( 'tab_advanced' ),
-        'child'    => saf_t( 'tab_child' ),
-        'sistema'  => saf_t( 'tab_sistema' ),
-        'plugins'  => saf_t( 'tab_plugins' ),
-        'credits'  => saf_t( 'tab_credits' ),
+        'org'       => saf_t( 'tab_org' ),
+        'seo'       => saf_t( 'tab_seo' ),
+        'security'  => saf_t( 'tab_security' ),
+        'robots'    => saf_t( 'tab_robots' ),
+        'nap'       => saf_t( 'tab_nap' ),
+        'shortcode' => saf_t( 'tab_shortcode' ),
+        'advanced'  => saf_t( 'tab_advanced' ),
+        'child'     => saf_t( 'tab_child' ),
+        'sistema'   => saf_t( 'tab_sistema' ),
+        'plugins'   => saf_t( 'tab_plugins' ),
+        'credits'   => saf_t( 'tab_credits' ),
     );
     ?>
     <div class="wrap saf-admin-wrap">
@@ -356,6 +402,9 @@ function saf_render_dati_sito() {
                         &nbsp;
                         <input type="text" name="saf_org_settings[city]"
                                 value="<?php echo esc_attr( $org['city'] ?? '' ); ?>" style="width:220px" placeholder="<?php echo esc_attr( saf_t( 'org_city' ) ); ?>">
+                        &nbsp;
+                        <input type="text" name="saf_org_settings[country]"
+                                value="<?php echo esc_attr( $org['country'] ?? 'IT' ); ?>" style="width:50px" placeholder="IT">
                     </td>
                 </tr>
                 <tr>
@@ -575,6 +624,111 @@ function saf_render_dati_sito() {
                 </tr>
             </table>
             <?php submit_button( saf_t( 'btn_save_nap' ) ); ?>
+        </form>
+
+        <?php elseif ( $tab === 'shortcode' ) : ?>
+        <?php
+        $sc_opts = (array) get_option( 'saf_sc_settings', array() );
+        $sc_enabled = $sc_opts['social_share'] ?? null;
+        $dev_enabled = $sc_opts['dev_enabled'] ?? null;
+        $dev_urls = $sc_opts['dev_urls'] ?? array();
+        // Se l'opzione non è mai stata salvata, default = tutti attivi
+        $all_on = ( $sc_enabled === null );
+        $all_dev_on = ( $dev_enabled === null );
+
+        $sc_platforms = array(
+            'facebook'  => array( 'label' => 'Facebook',  'color' => '#1877F2' ),
+            'whatsapp'  => array( 'label' => 'WhatsApp',  'color' => '#25D366' ),
+            'telegram'  => array( 'label' => 'Telegram',  'color' => '#0088cc' ),
+            'instagram' => array( 'label' => 'Instagram', 'color' => '#C13584', 'note' => saf_t( 'sc_copy_note' ) ),
+            'tiktok'    => array( 'label' => 'TikTok',    'color' => '#010101', 'note' => saf_t( 'sc_copy_note' ) ),
+            'email'     => array( 'label' => 'Email',     'color' => '#f47D39' ),
+            'copy'      => array( 'label' => saf_t( 'sc_copy_label' ), 'color' => '#6c757d' ),
+        );
+
+        $dev_platforms = array(
+            'github'         => array( 'label' => 'GitHub',          'color' => '#181717', 'placeholder' => 'https://github.com/username' ),
+            'gitlab'         => array( 'label' => 'GitLab',          'color' => '#FC6D26', 'placeholder' => 'https://gitlab.com/username' ),
+            'stackoverflow'  => array( 'label' => 'Stack Overflow',  'color' => '#F58025', 'placeholder' => 'https://stackoverflow.com/users/12345/username' ),
+            'reddit'         => array( 'label' => 'Reddit',          'color' => '#FF4500', 'placeholder' => 'https://reddit.com/user/username' ),
+            'devto'          => array( 'label' => 'Dev.to',          'color' => '#0A0A0A', 'placeholder' => 'https://dev.to/username' ),
+            'medium'         => array( 'label' => 'Medium',          'color' => '#000000', 'placeholder' => 'https://medium.com/@username' ),
+            'linkedin'       => array( 'label' => 'LinkedIn',        'color' => '#0A66C2', 'placeholder' => 'https://linkedin.com/in/username' ),
+            'amazon_author'  => array( 'label' => 'Amazon Authors',  'color' => '#FF9900', 'placeholder' => 'https://amazon.com/author/username' ),
+            'x'              => array( 'label' => 'X / Twitter',     'color' => '#000000', 'placeholder' => 'https://x.com/username' ),
+            'mastodon'       => array( 'label' => 'Mastodon',        'color' => '#6364FF', 'placeholder' => 'https://mastodon.social/@username' ),
+            'youtube'        => array( 'label' => 'YouTube',         'color' => '#FF0000', 'placeholder' => 'https://youtube.com/@channel' ),
+            'codepen'        => array( 'label' => 'CodePen',         'color' => '#000000', 'placeholder' => 'https://codepen.io/username' ),
+            'personal_site'  => array( 'label' => 'Sito personale',  'color' => '#f47D39', 'placeholder' => 'https://tuosito.it' ),
+        );
+        ?>
+        <form method="post" action="options.php">
+            <?php settings_fields( 'saf_sc_group' ); ?>
+            <h2><?php echo saf_t( 'sc_social_share_title' ); ?></h2>
+            <p class="description"><?php echo saf_t( 'sc_social_share_desc' ); ?></p>
+            <p class="description"><?php echo saf_t( 'sc_shortcode_usage' ); ?> <code>[condividi_social]</code> &middot; <code>[condividi_social type="dev"]</code> &middot; <code>[condividi_social type="all"]</code></p>
+
+            <h3 style="margin-top:24px;"><?php echo saf_t( 'sc_social_section' ); ?></h3>
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row"><?php echo saf_t( 'sc_active_buttons' ); ?></th>
+                    <td>
+                        <?php foreach ( $sc_platforms as $key => $meta ) :
+                            $checked = $all_on || in_array( $key, (array) $sc_enabled, true );
+                        ?>
+                        <label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer;">
+                            <input type="checkbox"
+                                   name="saf_sc_settings[social_share][]"
+                                   value="<?php echo esc_attr( $key ); ?>"
+                                   <?php checked( $checked ); ?>>
+                            <span style="display:inline-flex;align-items:center;gap:6px;">
+                                <span style="width:12px;height:12px;border-radius:50%;background:<?php echo esc_attr( $meta['color'] ); ?>;display:inline-block;flex-shrink:0;"></span>
+                                <strong><?php echo esc_html( $meta['label'] ); ?></strong>
+                                <?php if ( ! empty( $meta['note'] ) ) : ?>
+                                    <span style="color:#888;font-size:12px;"><?php echo esc_html( $meta['note'] ); ?></span>
+                                <?php endif; ?>
+                            </span>
+                        </label>
+                        <?php endforeach; ?>
+                        <p class="description" style="margin-top:8px;"><?php echo saf_t( 'sc_default_note' ); ?></p>
+                    </td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top:32px;padding-top:16px;border-top:1px solid #c3c4c7;"><?php echo saf_t( 'sc_dev_section' ); ?></h3>
+            <p class="description"><?php echo saf_t( 'sc_dev_desc' ); ?></p>
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row"><?php echo saf_t( 'sc_dev_profiles' ); ?></th>
+                    <td>
+                        <?php foreach ( $dev_platforms as $key => $meta ) :
+                            $checked = $all_dev_on || in_array( $key, (array) $dev_enabled, true );
+                            $url_val = $dev_urls[ $key ] ?? '';
+                        ?>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;min-width:160px;">
+                                <input type="checkbox"
+                                       name="saf_sc_settings[dev_enabled][]"
+                                       value="<?php echo esc_attr( $key ); ?>"
+                                       <?php checked( $checked ); ?>>
+                                <span style="display:inline-flex;align-items:center;gap:6px;">
+                                    <span style="width:12px;height:12px;border-radius:50%;background:<?php echo esc_attr( $meta['color'] ); ?>;display:inline-block;flex-shrink:0;"></span>
+                                    <strong><?php echo esc_html( $meta['label'] ); ?></strong>
+                                </span>
+                            </label>
+                            <input type="url"
+                                   name="saf_sc_settings[dev_urls][<?php echo esc_attr( $key ); ?>]"
+                                   value="<?php echo esc_url( $url_val ); ?>"
+                                   placeholder="<?php echo esc_attr( $meta['placeholder'] ); ?>"
+                                   class="regular-text" style="flex:1;">
+                        </div>
+                        <?php endforeach; ?>
+                        <p class="description" style="margin-top:4px;"><?php echo saf_t( 'sc_dev_url_note' ); ?></p>
+                    </td>
+                </tr>
+            </table>
+
+            <?php submit_button( saf_t( 'btn_save' ) ); ?>
         </form>
 
         <?php elseif ( $tab === 'advanced' ) : ?>
@@ -900,7 +1054,7 @@ function saf_render_dati_sito() {
         if ( defined( 'WP_DEBUG' ) && WP_DEBUG
              && ! empty( $_POST['saf_action'] ) && 'child_debug_write_test' === $_POST['saf_action']
              && check_admin_referer( 'saf_child_debug_test', 'saf_debug_nonce' )
-             && current_user_can( 'edit_themes' ) ) {
+             && current_user_can( 'manage_options' ) ) {
 
             clearstatcache();
             $perms      = file_exists( $css_file ) ? substr( sprintf( '%o', @fileperms( $css_file ) ), -4 ) : 'N/A';
@@ -982,7 +1136,8 @@ function saf_render_dati_sito() {
         ?>
         <h2><?php echo saf_t( 'child_title' ); ?></h2>
 
-        <div class="notice notice-warning" style="border-left-color:#e68a2e">
+        <?php if ( ! saf_is_notice_dismissed( 'child_info' ) ) : ?>
+        <div class="notice notice-warning is-dismissible saf-dismiss-custom" style="border-left-color:#e68a2e" data-saf-dismiss="child_info">
             <p><strong>🔒 Proteggi le tue personalizzazioni</strong></p>
             <p style="margin:4px 0">Modificare i file del tema principale (Divi, Astra, Twenty Twenty-Four…) è rischioso: <strong>alla prossima
             uscita del tema, tutte le modifiche vengono sovrascritte</strong>. Un child theme ti permette di:</p>
@@ -995,10 +1150,13 @@ function saf_render_dati_sito() {
             <code>inc/</code>, <code>css/</code>, <code>js/</code> e compatibilità Divi opzionale. Lo crei con un clic, poi imposti il
             <code>Template:</code> giusto e scegli nome/autore.</p>
         </div>
+        <?php endif; ?>
 
-        <div class="notice notice-info is-dismissible" style="border-left-color:#f47D39" data-saf-dismiss="child_activate">
+        <?php if ( ! saf_is_notice_dismissed( 'child_activate' ) ) : ?>
+        <div class="notice notice-info is-dismissible saf-dismiss-custom" style="border-left-color:#f47D39" data-saf-dismiss="child_activate">
             <p><strong>⚠️ <?php echo saf_t( 'child_activate_warn' ); ?></strong></p>
         </div>
+        <?php endif; ?>
 
         <?php if ( $is_detected ) : ?>
         <div class="notice notice-success" style="border-left-color:#2ea3f2">
@@ -1006,24 +1164,39 @@ function saf_render_dati_sito() {
         </div>
         <?php endif; ?>
 
-        <div class="notice notice-warning is-dismissible" style="border-left-color:#f47D39;font-size:12px" data-saf-dismiss="cache_note">
+        <?php if ( ! saf_is_notice_dismissed( 'cache_note' ) ) : ?>
+        <div class="notice notice-warning is-dismissible saf-dismiss-custom" style="border-left-color:#f47D39;font-size:12px" data-saf-dismiss="cache_note">
             <p><strong>⏳ Nota sulla cache del server:</strong> Se dopo aver creato o modificato il child theme non vedi subito le modifiche, attendi qualche secondo e <strong>ricarica la pagina</strong>. <br>OPcache e la cache PHP del server possono ritardare la propagazione dei file. Il child theme è stato comunque creato/salvato sul filesystem.</p>
         </div>
+        <?php endif; ?>
 
         <script>
         (function(){
-            var notices = document.querySelectorAll('.notice.is-dismissible[data-saf-dismiss]');
+            var notices = document.querySelectorAll('.saf-dismiss-custom');
             notices.forEach(function(n){
                 var key = n.getAttribute('data-saf-dismiss');
                 if ( localStorage.getItem('saf_dismissed_' + key) ) {
                     n.style.display = 'none';
+                    return;
                 }
                 var btn = n.querySelector('.notice-dismiss');
-                if ( btn ) {
-                    btn.addEventListener('click', function(){
-                        localStorage.setItem('saf_dismissed_' + key, '1');
-                    });
+                if ( ! btn ) {
+                    btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'notice-dismiss';
+                    btn.innerHTML = '<span class="screen-reader-text">Ignora questa notifica</span>';
+                    n.appendChild(btn);
                 }
+                btn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    n.style.display = 'none';
+                    localStorage.setItem('saf_dismissed_' + key, '1');
+                    var fd = new FormData();
+                    fd.append('action', 'saf_dismiss_notice');
+                    fd.append('key', key);
+                    fd.append('_ajax_nonce', saf_admin.dismiss_nonce);
+                    navigator.sendBeacon(ajaxurl, fd);
+                });
             });
         })();
         </script>
@@ -1110,28 +1283,6 @@ function saf_render_dati_sito() {
             <textarea rows="15" class="large-text code saf-code-editor" readonly><?php echo esc_textarea( $functions_content ); ?></textarea>
 
         <?php endif; ?>
-
-        <hr style="margin-top:24px">
-        <h3><?php echo saf_t( 'child_divi_title' ); ?></h3>
-        <p class="description"><?php echo saf_t( 'child_divi_desc' ); ?></p>
-        <form method="post" action="options.php">
-            <?php settings_fields( 'saf_adv_group' ); ?>
-            <table class="form-table">
-                <tr>
-                    <th><label for="saf_enable_divi"><?php echo saf_t( 'child_divi_label' ); ?></label></th>
-                    <td>
-                        <label>
-                            <input type="checkbox" id="saf_enable_divi"
-                                   name="saf_adv_settings[enable_divi]"
-                                   value="1" <?php checked( ! empty( $adv['enable_divi'] ) ); ?>>
-                            <?php echo saf_t( 'child_divi_label' ); ?>
-                        </label>
-                        <p class="description"><?php echo saf_t( 'child_divi_note' ); ?></p>
-                    </td>
-                </tr>
-            </table>
-            <?php submit_button( saf_t( 'child_save_divi' ), 'secondary' ); ?>
-        </form>
 
         <details style="margin-top:20px;padding:12px;background:#f0f0f1;border-radius:4px">
             <summary style="cursor:pointer;font-weight:bold">🔍 Diagnostica child theme</summary>
@@ -1916,7 +2067,7 @@ function saf_sanitize_adv( $input ) {
         'smtp_from_name'   => sanitize_text_field( $input['smtp_from_name'] ?? '' ),
         'smtp_from_email'  => sanitize_email( $input['smtp_from_email'] ?? '' ),
         'enable_svg'       => ! empty( $input['enable_svg'] ) ? 1 : 0,
-        'enable_divi'      => ! empty( $input['enable_divi'] ) ? 1 : 0,
+        // 'enable_divi' rimosso in v1.2.1
     );
 }
 
@@ -2017,7 +2168,7 @@ function saf_cleanup_options() {
         return;
     }
 
-    $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE 'saf_%'" );
+    $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", 'saf_%' ) );
 }
 
 
@@ -2032,5 +2183,30 @@ function saf_cleanup_on_deactivation() {
     // Chiedi conferma all'utente (hook standard non può mostrare UI)
     // Puliamo solo se è esplicitamente richiesto via clean_active_plugins
     // Per ora: lascia le opzioni, l'utente le pulisce manualmente da ⚙️ Avanzate
+}
+
+
+/* ============================================================
+   SEZIONE 60 — DISMISS NOTIFICHE PERSISTENTE (AJAX + user meta)
+   ============================================================ */
+
+add_action( 'wp_ajax_saf_dismiss_notice', 'saf_ajax_dismiss_notice' );
+function saf_ajax_dismiss_notice() {
+    check_ajax_referer( 'saf_dismiss_notice' );
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_die( -1 );
+    }
+    $key = sanitize_key( $_POST['key'] ?? '' );
+    if ( $key ) {
+        $dismissed = get_user_meta( get_current_user_id(), 'saf_dismissed_notices', true ) ?: array();
+        $dismissed[ $key ] = true;
+        update_user_meta( get_current_user_id(), 'saf_dismissed_notices', $dismissed );
+    }
+    wp_die( 1 );
+}
+
+function saf_is_notice_dismissed( $key ) {
+    $dismissed = get_user_meta( get_current_user_id(), 'saf_dismissed_notices', true ) ?: array();
+    return isset( $dismissed[ $key ] );
 }
 

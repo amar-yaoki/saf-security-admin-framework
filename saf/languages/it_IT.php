@@ -10,8 +10,9 @@ return array(
     'tab_seo'      => '🔍 SEO & Immagini',
     'tab_security' => '🔒 Sicurezza',
     'tab_robots'   => '🤖 Robots.txt',
-    'tab_nap'      => '📍 NAP Footer',
-    'tab_advanced' => '⚙️ Avanzate',
+    'tab_nap'       => '📍 NAP Footer',
+    'tab_shortcode' => '📋 Shortcode',
+    'tab_advanced'  => '⚙️ Avanzate',
     'tab_child'    => '🎨 Child Theme',
     'tab_credits'  => '📝 Crediti',
     'tab_sistema'  => '🖥 Sistema',
@@ -141,10 +142,6 @@ return array(
     'child_css_header' => 'Intestazione style.css',
     'child_css_header_desc' => 'Ogni campo ha una funzione specifica per WordPress. Il campo <strong>Template</strong> è obbligatorio.',
     'child_css_shortcuts' => 'Usa Personalizza &rarr; CSS aggiuntivo per regole rapide. Qui inserisci solo override strutturali del tema.',
-    'child_divi_title' => '🟠 Funzionalità Divi',
-    'child_divi_desc' => 'Attiva l\'header search con overlay AJAX (lente + ricerca fullscreen). Funziona se il tema parent è <strong>Divi</strong>.<br>Se attivato, il child theme carica <code>inc/header-search.php</code>.',
-    'child_divi_label' => 'Abilita header search Divi',
-    'child_divi_note'  => 'Aggiunge icona lente nel menu mobile Divi + overlay ricerca fullscreen AJAX.',
     'child_save_divi'  => 'Salva impostazioni Divi',
 
     /* Credits tab */
@@ -194,6 +191,10 @@ return array(
     'footer_dev_by'  => 'Sviluppato da',
     'url_placeholder_domain' => 'dominio.it',
 
+    /* Login */
+    'login_welcome_title' => 'Accedi',
+    'login_welcome_desc' => 'Inserisci le tue credenziali per accedere.',
+
     /* Errors & feedback */
     'err_permission' => 'Permesso negato.',
     'err_saved'                => '✔ Salvato.',
@@ -203,6 +204,7 @@ return array(
     'err_css_updated'  => '✔ style.css aggiornato.',
     'err_css_write_fail' => '❌ Impossibile scrivere %s. Verifica permessi.',
     'err_child_created' => '✔ Child theme <strong>amar-design</strong> creato.',
+    'err_ajax_unauthorized' => 'Richiesta non autorizzata.',
     'child_activate_warn' => 'Ricordati di attivare il child theme da <strong>Aspetto → Temi</strong> dopo aver creato e configurato i parametri (Template, Nome, Autore) nella sezione sottostante.',
     'child_detected'     => 'SAF ha rilevato un child theme attivo e lo gestisce automaticamente. Puoi modificare style.css e visualizzare functions.php qui sotto.',
     'child_functions_title' => 'functions.php',
@@ -211,4 +213,13 @@ return array(
     /* Plugin & Tools tab */
     'plugins_title' => 'Plugin e Strumenti',
     'plugins_desc'  => 'Rilevamento e checklist dei principali plugin e strumenti del sito.',
+
+    /* Shortcode tab */
+    'sc_social_share_title' => '📤 Condivisione Social',
+    'sc_social_share_desc'  => 'Scegli quali pulsanti mostrare nello shortcode <code>[condividi_social]</code>. Instagram e TikTok copiano il link negli appunti (non hanno un URL di condivisione nativo).',
+    'sc_shortcode_usage'    => 'Usa lo shortcode:',
+    'sc_active_buttons'     => 'Pulsanti attivi',
+    'sc_copy_note'          => '(copia link)',
+    'sc_copy_label'         => 'Copia link',
+    'sc_default_note'       => 'Se nessuna spunta è salvata, tutti i pulsanti sono visibili (comportamento predefinito).',
 );

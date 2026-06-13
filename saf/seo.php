@@ -1,7 +1,7 @@
 <?php
 /**
  * inc/seo.php
- * SEO base — SAF � Security & Admin Framework.
+ * SEO base — SAF � Security & Admin Framework.
  *
  * Sezione 40 — JSON-LD Organization (homepage, da ⚙️ Dati Sito)
  * Sezione 41 — JSON-LD WebSite + SearchAction (homepage)
@@ -51,7 +51,7 @@ function saf_json_ld_organization() {
             'streetAddress'   => $org['address'],
             'postalCode'      => $org['cap'],
             'addressLocality' => $org['city'],
-            'addressCountry'  => 'IT',
+            'addressCountry'  => $org['country'] ?? 'IT',
         );
     }
 

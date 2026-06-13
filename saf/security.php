@@ -230,9 +230,9 @@ function saf_generic_login_error() {
  * @param string $action Nome azione nonce (default: saf_ajax_nonce)
  */
 function saf_verify_ajax_nonce( $action = 'saf_ajax_nonce' ) {
-    $nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( $_REQUEST['nonce'] ) : '';
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
     if ( ! wp_verify_nonce( $nonce, $action ) ) {
-        wp_send_json_error( array( 'message' => 'Richiesta non autorizzata.' ), 403 );
+        wp_send_json_error( array( 'message' => saf_t( 'err_ajax_unauthorized' ) ), 403 );
     }
 }
 
@@ -310,7 +310,7 @@ function saf_login_welcome_message( $message ) {
 	if ( isset( $_GET['action'] ) && in_array( $_GET['action'], array( 'lostpassword', 'rp', 'register' ), true ) ) {
 		return $message;
 	}
-	return '<div class="saf-login-welcome"><h2>Accedi</h2><p>Inserisci le tue credenziali per accedere.</p></div>';
+	return '<div class="saf-login-welcome"><h2>' . saf_t( 'login_welcome_title' ) . '</h2><p>' . saf_t( 'login_welcome_desc' ) . '</p></div>';
 }
 
 // URL logo → homepage, testo → nome sito

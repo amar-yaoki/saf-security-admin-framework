@@ -4,7 +4,7 @@
  * Plugin Name: Amar SAF
  * Plugin URI:  https://yaoki.academy
  * Description: Moduli funzionali per WordPress: sicurezza, Admin, SEO, performance, dashboard, child theme. Di Amar Amoretti.
- * Version:     1.0.0
+ * Version:     1.2.1
  * Author:      Amar Amoretti
  * Author URI:  https://yaoki.academy
  * License:     GPL v2 or later
@@ -25,6 +25,8 @@
  *   cleanup.php      — Commenti, menu, admin bar
  *   dashboard.php    — Widget dashboard + crediti
  *   guida.php        — 📖 Guida Sito (6 tab)
+ *   duplicate.php    — Pulsante duplica post/pagine/CPT
+ *   post-status.php  — Stato "Archivio" per post/pagine/CPT
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -45,6 +47,8 @@ require_once SAF_DIR . 'performance.php';
 require_once SAF_DIR . 'cleanup.php';
 require_once SAF_DIR . 'dashboard.php';
 require_once SAF_DIR . 'guida.php';
+require_once SAF_DIR . 'duplicate.php';
+require_once SAF_DIR . 'post-status.php';
 
 /* ============================================================
    CHILD THEME — Creazione automatica all'attivazione
@@ -73,7 +77,7 @@ function saf_create_child_theme( $force = false ) {
         return 'error_mkdir';
     }
 
-    $files_to_copy = array( 'style.css' );
+    $files_to_copy = array( 'style.css', 'functions.php' );
     foreach ( $files_to_copy as $f ) {
         $src = $source . $f;
         $dst = $child_dir . $f;
@@ -244,12 +248,12 @@ function saf_sanitize_svg( $content ) {
     $dom = new DOMDocument();
     $dom->preserveWhiteSpace = true;
     libxml_use_internal_errors( true );
-    $dom->loadXML( $content );
+    $dom->loadXML( $content, LIBXML_NONET );
     libxml_clear_errors();
 
     $root = $dom->documentElement;
     if ( ! $root || $root->nodeName !== 'svg' ) {
-        return $content; // non è un SVG valido
+        return $content;
     }
 
     $xpath = new DOMXPath( $dom );
@@ -263,15 +267,15 @@ function saf_sanitize_svg( $content ) {
         $attrs_to_remove = array();
         foreach ( $node->attributes as $attr ) {
             $name = strtolower( $attr->nodeName );
-            // Blocca event handler on*
             if ( strpos( $name, 'on' ) === 0 ) {
                 $attrs_to_remove[] = $attr->nodeName;
                 continue;
             }
-            // Blocca javascript: href
             if ( in_array( $name, array( 'href', 'xlink:href' ), true ) ) {
                 $val = strtolower( trim( $attr->nodeValue ) );
-                if ( strpos( $val, 'javascript:' ) === 0 ) {
+                if ( strpos( $val, 'javascript:' ) === 0
+                    || strpos( $val, 'http://' ) === 0
+                    || strpos( $val, 'https://' ) === 0 ) {
                     $attrs_to_remove[] = $attr->nodeName;
                     continue;
                 }
