@@ -1,0 +1,105 @@
+/* ===== SAF v2 Admin CSS ===== */
+.saf-dashboard .saf-version {
+    font-size: 13px;
+    font-weight: 400;
+    color: #e68a2e;
+    background: #fef5e7;
+    padding: 2px 10px;
+    border-radius: 12px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+.saf-dashboard .saf-subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-top: -8px;
+}
+.saf-dashboard .saf-credits {
+    background: #f9f9f9;
+    padding: 8px 14px;
+    border-left: 3px solid #e68a2e;
+    margin: 12px 0;
+    font-size: 13px;
+    border-radius: 0 4px 4px 0;
+}
+.saf-dashboard .saf-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+.saf-dashboard .saf-card h3 {
+    margin-top: 0;
+    border-bottom: 2px solid #e68a2e;
+    padding-bottom: 8px;
+}
+.saf-dashboard .saf-tabs {
+    margin-top: 16px;
+}
+.saf-dashboard .saf-tab-content {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 20px;
+    border-radius: 0 0 4px 4px;
+}
+.saf-dashboard .saf-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+@media (max-width: 782px) {
+    .saf-dashboard .saf-grid-2col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dashboard Widget */
+.saf-widget-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 12px 0;
+}
+.saf-widget-card {
+    text-align: center;
+    padding: 12px;
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+.saf-widget-value {
+    font-size: 22px;
+}
+.saf-widget-cta {
+    margin: 0;
+}
+.saf-widget-credits {
+    margin: 8px 0 0;
+    font-size: 11px;
+    color: #999;
+}
+
+/* Post Status badges */
+.saf-status-draft,
+.saf-status-pending {
+    color: #e68a2e;
+    font-weight: 600;
+}
+
+/* Video wrapper (responsive 16:9) */
+.saf-video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    margin: 1.5em 0;
+}
+.saf-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

@@ -1,4 +1,5 @@
 <?php
+if ( defined( 'SAF_VERSION' ) && version_compare( SAF_VERSION, '2.0', '>=' ) ) return;
 /**
  * guida.php — Pagina 📖 Guida Sito.
  *

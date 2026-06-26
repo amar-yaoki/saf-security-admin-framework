@@ -1,7 +1,8 @@
 <?php
+if ( defined( 'SAF_VERSION' ) && version_compare( SAF_VERSION, '2.0', '>=' ) ) return;
 /**
  * inc/performance.php
- * Ottimizzazioni performance WordPress — SAF � Security & Admin Framework.
+ * Ottimizzazioni performance WordPress — SAF � Security & Admin Framework.
  *
  * Sezione 25 — Rimozione script e stili inutili di WP core
  * Sezione 26 — Disabilitazione oEmbed e link correlati

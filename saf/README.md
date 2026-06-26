@@ -8,103 +8,115 @@ Sviluppato da [Amar Amoretti](https://yaoki.academy) — GPL v2+.
 
 ## Cos'è SAF?
 
-Un **must-use plugin** (o plugin normale) che include 9 moduli funzionali indipendenti. Ogni modulo fa una cosa e la fa bene. Funziona con **qualsiasi tema WordPress**: Divi, Astra, GeneratePress, Kadence, Twenty Twenty-Four...
+Un **plugin WordPress** (standard o MU) con 6 moduli funzionali indipendenti e un'interfaccia admin unificata. Ogni modulo fa una cosa e la fa bene. Funziona con **qualsiasi tema WordPress**: Divi, Astra, GeneratePress, Kadence, Twenty Twenty-Four...
 
-Niente jQuery, niente dipendenze, niente bloat.
+Niente jQuery (salvo admin.js), niente dipendenze pesanti, niente bloat.
+
+**Novità v2.0:** architettura OOP con namespace `SAF\*`, autoloader PSR-4, template separati, menu WooCommerce-style, helper classi, i18n.
 
 ---
+
+## Struttura v2
+
+```
+saf/
+├── saf.php                          ← Entry point (plugin header)
+├── saf-loader.php                   ← MU loader
+├── version.php                      ← SAF_VERSION, SAF_DIR, SAF_URL
+├── src/
+│   ├── Autoloader.php               ← PSR-4 autoloader
+│   ├── Plugin.php                   ← Bootstrap, init moduli
+│   ├── helpers-compat.php           ← Funzioni globali v1 preservate
+│   ├── I18n/Translator.php          ← Traduzioni via PHP array
+│   ├── Modules/                     ← 6 moduli OOP
+│   │   ├── Security.php
+│   │   ├── SEO.php
+│   │   ├── Performance.php
+│   │   ├── Cleanup.php
+│   │   ├── Duplicate.php
+│   │   └── PostStatus.php
+│   ├── Admin/                       ← Admin menu e pagine
+│   │   ├── AdminMenu.php
+│   │   ├── SettingsPage.php
+│   │   ├── DashboardWidget.php
+│   │   └── GuidaPage.php
+│   └── Helpers/                     ← Classi helper
+│       ├── YouTube.php              ← Embed video con nocookie
+│       ├── DateFormatter.php        ← Date relative italiane
+│       ├── SocialShare.php          ← Pulsanti condivisione
+│       └── Pagination.php           ← Navigazione pagine
+├── templates/admin/                 ← 8 template separati
+├── assets/css/                      ← admin.css + login.css
+├── assets/js/                       ← admin.js
+├── languages/                       ← it_IT.php + en_US.php
+├── tests/                           ← PHPUnit bootstrap + test
+└── child-theme/                     ← Child theme amar-design (preservato)
+```
 
 ## Moduli
 
-| Modulo | File | Cosa fa |
-|--------|------|---------|
-| 🔒 **Sicurezza** | `security.php` | Rate limiting login, XML-RPC off, HSTS, honeypot, security headers, login brandizzato |
-| ⚙️ **Dati Sito** | `admin.php` | 10 tab: Org, SEO, Security, Robots, NAP, Child, Credits, Adv, Plugin, Sistema |
-| 🔍 **SEO** | `seo.php` | JSON-LD Organization/WebSite/BreadcrumbList, canonical, OG tags fallback |
-| 🛠️ **Helpers** | `helpers.php` | YouTube ID, date italiana, social sharing, paginazione, reading time, NAP |
-| 🚀 **Performance** | `performance.php` | oEmbed off, heartbeat off, revisioni limitate, lazy load, CF7 ottimizzato |
-| 🧹 **Cleanup** | `cleanup.php` | Disabilitazione commenti, pulizia menu admin, admin bar, footer personalizzato |
-| 📊 **Dashboard** | `dashboard.php` | Widget Panoramica Sito con checklist, sicurezza, pulsanti rapidi |
-| 📖 **Guida** | `guida.php` | 7 tab: info, struttura, shortcode, sicurezza, checklist, progetto, note |
+| Modulo | Classe | Cosa fa |
+|--------|--------|---------|
+| **Sicurezza** | `Security` | Rimuove generator tag, XML-RPC, pingback, endpoint REST anonimi, notifiche WP_DEBUG, login CSS |
+| **SEO** | `SEO` | Meta description automatica, supporto excerpt, title filter (attivabile da impostazioni) |
+| **Performance** | `Performance` | Rimuove emoji, embed, jQuery migrate; defer CSS/JS opzionale |
+| **Cleanup** | `Cleanup` | Disabilita commenti, pulisce admin bar, rimuove menu default, contatori CPT in dashboard |
+| **Duplicate** | `Duplicate` | Link "Clona" su pagine/articoli/CPT con copia di meta, tassonomie e thumbnail |
+| **Post Status** | `PostStatus` | Contatore bozze in admin bar, stati colore, shortcode version info |
 
----
+## Helper
+
+| Classe | Metodi principali |
+|--------|-------------------|
+| `YouTube` | `getEmbedUrl($url)`, `renderEmbed($url, $title, $attrs)`, shortcode `[saf_youtube]` |
+| `DateFormatter` | `formatRelative($date)`, `formatItalian($date, $show_time)` |
+| `SocialShare` | `getLinks($url, $title)`, `renderButtons($url, $title, $networks)` |
+| `Pagination` | `render($query, $args)` |
 
 ## Installazione
 
-### Come MU Plugin (consigliato)
+### Come plugin normale
+
+1. Copia la cartella `saf/` in `/wp-content/plugins/saf/`
+2. Vai in **Plugin → Aggiungi → Attiva**
+
+### Come MU Plugin
 
 1. Copia la cartella `saf/` in `/wp-content/mu-plugins/saf/`
-2. Il file `saf-loader.php` va in `/wp-content/mu-plugins/saf-loader.php` **(attenzione: NON dentro /saf/)**
-3. I moduli sono **sempre attivi** — non si possono disattivare per errore
+2. Copia `saf-loader.php` in `/wp-content/mu-plugins/saf-loader.php`
+3. I moduli sono sempre attivi
 
 ```
 wp-content/
 └── mu-plugins/
-    ├── saf-loader.php       ← questo è l'entry point
+    ├── saf-loader.php       ← entry point MU
     └── saf/
+        ├── saf.php
         ├── version.php
-        ├── security.php
-        ├── admin.php
+        ├── src/
         └── ...
 ```
 
-### Come Plugin Normale
+## Shortcode
 
-1. Copia l'intera cartella `saf/` in `/wp-content/plugins/saf/`
-2. Vai in **Plugin → Aggiungi → Attiva**
+| Shortcode | Descrizione |
+|-----------|-------------|
+| `[saf_version_info]` | Mostra versioni PHP, WordPress e SAF |
+| `[saf_youtube url="..." title="..."]` | Embed YouTube con youtube-nocookie.com |
 
-In entrambi i casi, `saf-loader.php` rileva automaticamente la posizione e carica tutti i moduli.
+## Child Theme
 
----
+Il child theme **amar-design** può essere creato dalla dashboard SAF → tab **Child Theme**.
+Viene creato in `/wp-content/themes/amar-design/` con style.css, functions.php e le cartelle inc/, css/, js/.
 
-## Child Theme (opzionale)
+## Traduzioni
 
-Il child theme **amar-design** può essere creato automaticamente:
+SAF supporta IT ed EN. Le traduzioni sono file PHP in `languages/`.
+Per aggiungere una lingua: copia `languages/it_IT.php` in `languages/{locale}.php` e traducí le stringhe.
 
-1. Vai su **⚙️ Dati Sito → Child Theme**
-2. Clicca **"Crea child theme amar-design"** se non esiste
-3. Modifica `style.css` per impostare il `Template:` corretto
-4. Attiva il tema da **Aspetto → Temi**
+## Upgrade da v1
 
-Il `Template:` deve corrispondere alla cartella del tema parent:
-- `Template: Divi` per Divi
-- `Template: twentytwentyfour` per Twenty Twenty-Four
-- `Template: astra` per Astra
-- `Template: generatepress` per GeneratePress
-
-**Feature extra Divi:** Se il tema parent è Divi, puoi attivare l'header search con overlay AJAX (lente + ricerca fullscreen) dal tab Child Theme.
-
----
-
-## Personalizzazione crediti
-
-Modifica `saf/CREDITS.md` per cambiare il nome autore e il sito web che appaiono:
-- Nel widget dashboard
-- Nel footer admin di WordPress
-
----
-
-## Prima configurazione
-
-1. Vai su **⚙️ Dati Sito** nel menu admin
-2. Compila il tab **Organizzazione** (nome azienda, logo, indirizzo, social)
-3. Vai al tab **Sicurezza** → imposta il numero massimo di tentativi login
-4. Vai al tab **Robots.txt** → modifica il contenuto se necessario
-5. Vai al tab **Avanzate** → configura SMTP, commenti, HSTS, menu admin
-6. Vai al tab **Plugin** → verifica cache, SEO, backup e strumenti di sicurezza
-7. Vai al tab **Sistema** → esegui il self-test per verificare che tutto funzioni
-
----
-
-## Disinstallazione
-
-1. Disattiva il plugin (se plugin normale) o rimuovi `saf-loader.php` (se MU plugin)
-2. Le opzioni salvate rimangono nel DB. Per rimuoverle:
-   ```sql
-   DELETE FROM wp_options WHERE option_name LIKE 'saf_%';
-   ```
-
----
+Tutte le funzioni globali v1 sono preservate in `src/helpers-compat.php`. I file v1 nella root (`security.php`, `seo.php`, ecc.) restano per backward compat ma vengono automaticamente saltati se v2 è attivo.
 
 ## Licenza
 

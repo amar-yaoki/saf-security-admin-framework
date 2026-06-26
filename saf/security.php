@@ -1,4 +1,5 @@
 <?php
+if ( defined( 'SAF_VERSION' ) && version_compare( SAF_VERSION, '2.0', '>=' ) ) return;
 /**
  * inc/security.php
  * Hardening sicurezza WordPress — SAF � Security & Admin Framework.

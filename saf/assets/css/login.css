@@ -1,0 +1,51 @@
+/* Login CSS — SAF v2 */
+body.login {
+    background-color: #121212;
+}
+body.login h1 a {
+    background-image: none, none;
+    width: auto;
+    height: auto;
+    text-indent: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    padding: 20px 0 0;
+    pointer-events: none;
+}
+body.login form {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.4);
+}
+body.login form label {
+    color: #ccc;
+}
+body.login input[type=text],
+body.login input[type=password] {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: #eee;
+    border-radius: 4px;
+}
+body.login .button-primary {
+    background: #e68a2e;
+    border-color: #e68a2e;
+    color: #fff;
+    text-shadow: none;
+    box-shadow: none;
+}
+body.login .button-primary:hover,
+body.login .button-primary:focus {
+    background: #d47a1e;
+    border-color: #d47a1e;
+}
+body.login .message,
+body.login #login_error {
+    border-left-color: #e68a2e;
+}
+body.login a {
+    color: #e68a2e;
+}
