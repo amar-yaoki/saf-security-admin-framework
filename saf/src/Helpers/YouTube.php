@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\Helpers;
+defined( 'ABSPATH' ) || exit;
 
 class YouTube {
     public static function getEmbedUrl( string $url ): string {

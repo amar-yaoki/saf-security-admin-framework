@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\Helpers;
+defined( 'ABSPATH' ) || exit;
 
 class Pagination {
     public static function render( \WP_Query $query, array $args = [] ): string {

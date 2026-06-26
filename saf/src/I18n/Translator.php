@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\I18n;
+defined( 'ABSPATH' ) || exit;
 
 class Translator {
     private static ?array $strings = null;

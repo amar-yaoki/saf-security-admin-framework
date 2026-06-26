@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\Modules;
+defined( 'ABSPATH' ) || exit;
 
 class Cleanup {
     public function init(): void {

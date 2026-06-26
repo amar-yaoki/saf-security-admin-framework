@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\Admin;
+defined( 'ABSPATH' ) || exit;
 
 class SettingsPage {
     public function init(): void {

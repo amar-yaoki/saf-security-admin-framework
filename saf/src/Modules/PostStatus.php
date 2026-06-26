@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\Modules;
+defined( 'ABSPATH' ) || exit;
 
 class PostStatus {
     public function init(): void {

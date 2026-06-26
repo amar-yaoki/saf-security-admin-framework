@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\Helpers;
+defined( 'ABSPATH' ) || exit;
 
 class DateFormatter {
     public static function formatRelative( string $date_string ): string {

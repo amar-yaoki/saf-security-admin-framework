@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\Admin;
+defined( 'ABSPATH' ) || exit;
 
 class GuidaPage {
     public function init(): void {

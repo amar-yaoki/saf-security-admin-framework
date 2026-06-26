@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF;
+defined( 'ABSPATH' ) || exit;
 
 class Autoloader {
     public static function register(): void {

@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF;
+defined( 'ABSPATH' ) || exit;
 
 use SAF\Admin\AdminMenu;
 use SAF\Admin\SettingsPage;

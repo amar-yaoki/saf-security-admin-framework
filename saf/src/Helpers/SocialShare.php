@@ -1,6 +1,6 @@
 <?php
-defined( 'ABSPATH' ) || exit;
 namespace SAF\Helpers;
+defined( 'ABSPATH' ) || exit;
 
 class SocialShare {
     public static function getLinks( string $url, string $title, array $networks = [] ): array {
