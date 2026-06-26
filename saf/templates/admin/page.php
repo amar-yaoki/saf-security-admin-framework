@@ -1,7 +1,7 @@
 <?php
 /**
  * Admin page template for SAF v2.
- * Variables: $tab, $credits
+ * Variables: $tab, $credits_html
  */
 defined( 'ABSPATH' ) || exit;
 ?>
@@ -14,13 +14,15 @@ defined( 'ABSPATH' ) || exit;
     <?php endif; ?>
 
     <nav class="nav-tab-wrapper saf-tabs">
-        <a href="?page=saf&tab=dashboard" class="nav-tab <?php echo $tab === 'dashboard' ? 'nav-tab-active' : ''; ?>">Dashboard</a>
-        <a href="?page=saf&tab=settings"  class="nav-tab <?php echo $tab === 'settings' ? 'nav-tab-active' : ''; ?>">Impostazioni</a>
-        <a href="?page=saf&tab=modules"   class="nav-tab <?php echo $tab === 'modules' ? 'nav-tab-active' : ''; ?>">Moduli</a>
-        <a href="?page=saf&tab=tools"     class="nav-tab <?php echo $tab === 'tools' ? 'nav-tab-active' : ''; ?>">Strumenti</a>
-        <a href="?page=saf&tab=child"     class="nav-tab <?php echo $tab === 'child' ? 'nav-tab-active' : ''; ?>">Child Theme</a>
-        <a href="?page=saf&tab=guida"     class="nav-tab <?php echo $tab === 'guida' ? 'nav-tab-active' : ''; ?>">Guida</a>
-        <a href="?page=saf&tab=about"     class="nav-tab <?php echo $tab === 'about' ? 'nav-tab-active' : ''; ?>">About</a>
+        <a href="?page=saf&tab=dashboard"    class="nav-tab <?php echo $tab === 'dashboard' ? 'nav-tab-active' : ''; ?>">Dashboard</a>
+        <a href="?page=saf&tab=settings"     class="nav-tab <?php echo $tab === 'settings' ? 'nav-tab-active' : ''; ?>">Impostazioni</a>
+        <a href="?page=saf&tab=modules"      class="nav-tab <?php echo $tab === 'modules' ? 'nav-tab-active' : ''; ?>">Moduli</a>
+        <a href="?page=saf&tab=tools"        class="nav-tab <?php echo $tab === 'tools' ? 'nav-tab-active' : ''; ?>">Strumenti</a>
+        <a href="?page=saf&tab=diagnostica"  class="nav-tab <?php echo $tab === 'diagnostica' ? 'nav-tab-active' : ''; ?>">Diagnostica</a>
+        <a href="?page=saf&tab=child"        class="nav-tab <?php echo $tab === 'child' ? 'nav-tab-active' : ''; ?>">Child Theme</a>
+        <a href="?page=saf&tab=guida"        class="nav-tab <?php echo $tab === 'guida' ? 'nav-tab-active' : ''; ?>">Guida</a>
+        <a href="?page=saf&tab=credits"      class="nav-tab <?php echo $tab === 'credits' ? 'nav-tab-active' : ''; ?>">Credits</a>
+        <a href="?page=saf&tab=about"        class="nav-tab <?php echo $tab === 'about' ? 'nav-tab-active' : ''; ?>">About</a>
     </nav>
 
     <div class="saf-tab-content">

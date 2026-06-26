@@ -20,7 +20,16 @@ class AdminMenu {
             'data:image/svg+xml;base64,' . base64_encode( $this->getIconSvg() ),
             3
         );
+
         add_submenu_page( 'saf', 'Dashboard SAF', 'Dashboard', 'manage_options', 'saf', [ $this, 'renderDashboard' ] );
+        add_submenu_page( 'saf', 'Impostazioni SAF', 'Impostazioni', 'manage_options', 'saf&tab=settings', '__return_false' );
+        add_submenu_page( 'saf', 'Moduli SAF', 'Moduli', 'manage_options', 'saf&tab=modules', '__return_false' );
+        add_submenu_page( 'saf', 'Strumenti SAF', 'Strumenti', 'manage_options', 'saf&tab=tools', '__return_false' );
+        add_submenu_page( 'saf', 'Diagnostica SAF', 'Diagnostica', 'manage_options', 'saf&tab=diagnostica', '__return_false' );
+        add_submenu_page( 'saf', 'Child Theme', 'Child Theme', 'manage_options', 'saf&tab=child', '__return_false' );
+        add_submenu_page( 'saf', 'Guida SAF', 'Guida', 'manage_options', 'saf&tab=guida', '__return_false' );
+        add_submenu_page( 'saf', 'Credits SAF', 'Credits', 'manage_options', 'saf&tab=credits', '__return_false' );
+        add_submenu_page( 'saf', 'About SAF', 'About', 'manage_options', 'saf&tab=about', '__return_false' );
     }
 
     public function enqueueAssets( string $hook ): void {
@@ -35,10 +44,10 @@ class AdminMenu {
 
     public function renderDashboard(): void {
         $tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'dashboard';
-        $allowed_tabs = [ 'dashboard', 'settings', 'modules', 'tools', 'child', 'guida', 'about' ];
+        $allowed_tabs = [ 'dashboard', 'settings', 'modules', 'tools', 'diagnostica', 'child', 'guida', 'credits', 'about' ];
         if ( ! in_array( $tab, $allowed_tabs, true ) ) $tab = 'dashboard';
-        $credits = '';
-        if ( function_exists( 'saf_get_credits_html' ) ) $credits = saf_get_credits_html();
+        $credits_html = '';
+        if ( function_exists( 'saf_get_credits_html' ) ) $credits_html = saf_get_credits_html();
         include SAF_DIR . 'templates/admin/page.php';
     }
 
@@ -68,7 +77,6 @@ class AdminMenu {
         $parts   = explode( '*/', $content, 2 );
         $header  = $parts[0] . '*/';
 
-        // Backup prima della modifica
         $backup_file = $child_dir . 'style.css.bak';
         @copy( $css_file, $backup_file );
 

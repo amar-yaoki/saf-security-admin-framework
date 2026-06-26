@@ -4,20 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 class SettingsPage {
     public function init(): void {
-        add_action( 'admin_menu', [ $this, 'registerSubmenu' ], 11 );
         add_action( 'admin_init', [ $this, 'registerSettings' ] );
         add_action( 'admin_post_saf_save_settings', [ $this, 'handleSave' ] );
-    }
-
-    public function registerSubmenu(): void {
-        add_submenu_page(
-            'saf',
-            'Impostazioni SAF',
-            'Impostazioni',
-            'manage_options',
-            'saf&tab=settings',
-            '__return_false'
-        );
     }
 
     public function registerSettings(): void {

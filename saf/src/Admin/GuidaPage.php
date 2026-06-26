@@ -4,19 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 class GuidaPage {
     public function init(): void {
-        add_action( 'admin_menu', [ $this, 'registerSubmenu' ], 11 );
         add_action( 'admin_init', [ $this, 'registerGuidaSettings' ] );
-    }
-
-    public function registerSubmenu(): void {
-        add_submenu_page(
-            'saf',
-            'Guida SAF — Documentazione',
-            'Guida',
-            'manage_options',
-            'saf&tab=guida',
-            '__return_false'
-        );
     }
 
     public function registerGuidaSettings(): void {

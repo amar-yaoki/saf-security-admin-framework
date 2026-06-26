@@ -137,8 +137,9 @@ class Security {
         $logo = $org['logo'] ?? '';
         if ( $logo ) {
             echo '<style>#login h1 a { background-image: url(' . esc_url( $logo ) . ') !important; }</style>';
+        } else {
+            echo '<style>#login h1 a { padding:12px 0 6px; background-image:none !important; min-height:auto; color:#f47D39; font-size:22px; }</style>';
         }
-        echo '<style>.saf-login-welcome h2 { color: #f47D39; }</style>';
     }
 
     public function loginWelcomeMessage( $message ): string {
