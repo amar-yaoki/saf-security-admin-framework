@@ -3,6 +3,9 @@ namespace SAF\Helpers;
 defined( 'ABSPATH' ) || exit;
 
 class Pagination {
+    public function init(): void {
+    }
+
     public static function render( \WP_Query $query, array $args = [] ): string {
         $defaults = [
             'prev_text' => '&laquo; Precedente',
@@ -32,5 +35,18 @@ class Pagination {
         }
         $html .= '</ul></nav>';
         return $html;
+    }
+
+    public static function renderNetflix( int $total_pages, int $current_page, string $ajax_action = 'saf_load_more', array $extra_data = [] ): string {
+        if ( $current_page >= $total_pages ) return '';
+
+        $data = array_merge( [
+            'action'       => sanitize_key( $ajax_action ),
+            'current_page' => (int) $current_page,
+            'total_pages'  => (int) $total_pages,
+        ], $extra_data );
+
+        return '<div class="saf-load-more-wrap"><button class="saf-load-more" data-params="'
+            . esc_attr( wp_json_encode( $data ) ) . '">Carica altri</button></div>';
     }
 }

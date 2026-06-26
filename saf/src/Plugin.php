@@ -14,10 +14,15 @@ use SAF\Modules\Duplicate;
 use SAF\Modules\PostStatus;
 use SAF\I18n\Translator;
 use SAF\Helpers\YouTube;
+use SAF\Helpers\SocialShare;
+use SAF\Helpers\Breadcrumb;
+use SAF\Helpers\ReadingTime;
+use SAF\Helpers\FooterInfo;
+use SAF\Helpers\NapHtml;
+use SAF\Helpers\Pagination;
 
 class Plugin {
     private static ?Plugin $instance = null;
-
     private array $modules = [];
 
     public static function getInstance(): self {
@@ -53,6 +58,11 @@ class Plugin {
         }
 
         YouTube::registerShortcode();
+        ( new SocialShare() )->init();
+        ( new Breadcrumb() )->init();
+        ( new ReadingTime() )->init();
+        ( new FooterInfo() )->init();
+        ( new NapHtml() )->init();
 
         $this->initCompatHelpers();
     }
