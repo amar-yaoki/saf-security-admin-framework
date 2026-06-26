@@ -55,6 +55,9 @@ class SettingsPage {
             'youtube'   => esc_url_raw( $input['youtube']   ?? '' ),
             'linkedin'  => esc_url_raw( $input['linkedin']  ?? '' ),
             'twitter'   => esc_url_raw( $input['twitter']   ?? '' ),
+            'github'    => esc_url_raw( $input['github']    ?? '' ),
+            'reddit'    => esc_url_raw( $input['reddit']    ?? '' ),
+            'amazon_author' => esc_url_raw( $input['amazon_author'] ?? '' ),
         ];
     }
 
@@ -73,7 +76,7 @@ class SettingsPage {
     }
 
     public function sanitizeSc( $input ): array {
-        $allowed_social = [ 'facebook', 'whatsapp', 'telegram', 'instagram', 'tiktok', 'email', 'copy' ];
+        $allowed_social = [ 'facebook', 'whatsapp', 'telegram', 'instagram', 'tiktok', 'email', 'reddit', 'github', 'copy' ];
         $allowed_dev    = [ 'github', 'gitlab', 'stackoverflow', 'reddit', 'devto', 'medium', 'linkedin', 'amazon_author', 'x', 'mastodon', 'youtube', 'codepen', 'personal_site' ];
         $clean = [];
         if ( ! empty( $input['social_share'] ) && is_array( $input['social_share'] ) ) {
