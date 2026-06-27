@@ -32,9 +32,9 @@ if ( file_exists( $css_file ) ) {
 <form method="post">
 <?php wp_nonce_field( 'saf_child_css', 'saf_child_nonce' ); ?>
 <input type="hidden" name="saf_action" value="child_save_css">
-<table class="form-table">
-<tr><th>style.css</th><td><textarea name="saf_css_body" rows="18" class="saf-code-editor"><?php echo esc_textarea( $css_body ); ?></textarea></td></tr>
-</table>
+<p><label for="saf_child_css_editor" style="font-weight:600;display:block;margin-bottom:4px;">style.css</label></p>
+<textarea id="saf_child_css_editor" name="saf_css_body" rows="20" class="saf-code-editor" style="width:100%;max-width:100%;box-sizing:border-box;"><?php echo esc_textarea( $css_body ); ?></textarea>
+<p class="description" style="margin-bottom:12px;">Modifica il file style.css del child theme. Un backup automatico viene creato prima del salvataggio.</p>
 <?php submit_button( 'Salva style.css' ); ?>
 </form>
 <?php endif; ?>
